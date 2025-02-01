@@ -8,6 +8,6 @@
 - [ ] Tutorial Playlist:
   - [x] Video 1
   - [x] Video 2
-  - [ ] Video 3
+  - [x] Video 3
   - [ ] Video 4
 - [ ] Practice: 
