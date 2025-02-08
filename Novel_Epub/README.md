@@ -5,3 +5,8 @@ Inputs/Variable:
 - **Starting Chapter**
 - **End Chapter**
 - **Cover Path**
+
+  Status:
+- [x] Downloading one chapter and saving it as epub.
+- [ ] Downloading multiple chapters and saving it as epub.
+- [ ] Include epilogues/extra chapters if exist.
