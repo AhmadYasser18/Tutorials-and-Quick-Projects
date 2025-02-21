@@ -67,6 +67,7 @@ Notice that the output will have two features or neurons, due to the out_feature
 Consider the linear_layer object we created. Each linear layer has a set of *weights* and *biases* associated with it.
 **What operation does nn.Linear() perform?**
 When input_tensor is passed to linear_layer, the linear operation performed is a matrix multiplication of input_tensor and the weights, followed by adding in the bias.
+
 ![image](https://github.com/user-attachments/assets/4a4fbaf4-b8b1-472c-a6fa-d22fdafd10c9)
 
 When nn.Linear() is called , weights and biases are initialized randomly, so they are not yet useful. Later on, these weights and biases can be tuned so that the linear operation output is meaningful.
@@ -86,3 +87,51 @@ output_tensor = model(input_tensor)
 ~~~
 Having one row of data called input_tensor, with ten "features", or neurons. Recall we set the first argument of our first linear layer to ten, to be compatible with this shape. We now pass input_tensor to our multi-layer model to obtain output, just as done before using a single linear layer. Again, output is not meaningful until each layer has tuned weights and biases.
 
+## Discovering activation functions
+When using linear layers, each linear layer multiplies its input by its weights and adds biases. Two or more linear layers stacked in a row still effectively perform a linear operation.
+However, linear layers are not the only layer type that can be added to a network. Using activation functions adds non-linearity to a network. This non-linearity grants networks the ability to learn more complex interactions between inputs X and targets y than only linear relationships. The output will no longer be a linear function of the input. The  the output of the last linear layer will be refered to as the "pre-activation" output, which'll pass to activation functions to obtain transformed output.
+
+![image](https://github.com/user-attachments/assets/8d1e2abd-8991-4986-9c4f-13148d2d0f8c)
+
+### The Sigmoid function
+- Widely used for **binary classification** problems.
+- Passing the input to a model with two linear layers returns a single output. This number is not yet interpretable as either category.
+- The "pre-activation" output is passed the sigmoid and transform it to an output between zero and one.
+- If the output is closer to one, we label it as class one. If it were less than 0.5, the prediction would be zero.
+
+**Implementing sigmoid in PyTorch**
+~~~python
+import torch
+import torch.nn as nn
+
+input_tensor = torch.tensor([[6]])
+sigmoid = nn.Sigmoid() #takes a one-dimensional input_tensor and returns an output bounded between zero and one.
+output = sigmoid(input_tensor)
+~~~
+The sigmoid is commonly used as the **last step** in a neural network when performing binary classification. It is added as the last step in nn.Sequential(), and the last linear layer's output will automatically be passed to the sigmoid. *Note that a sigmoid as the last step in a network of only linear layers is equivalent to a logistic regression using traditional machine learning.*
+
+~~~python'
+model = nn.Sequential(
+    nn.Linear(6, 4),
+    nn.Linear(4, 1)
+    nn.Sigmoid()
+)
+~~~
+
+### The Softmax function
+Sigmoid is used for binary classification. For multiclass classification, involving more than two class labels, softmax is used. 
+In this model softmax takes a n-dimensional pre-activation and generates an output of the same shape, one by n.
+
+The output is a probability distribution because each element is between zero and one, and values sum to one.
+In PyTorch, we use nn.Softmax(). dim equals -1 indicates that softmax is applied to input_tensor's last dimension. Similar to sigmoid, softmax can be the last layer in nn.Sequential.
+~~~python'
+import torch
+import torch.nn as nn
+
+input_tensor = torch.tensor([[x1, x2, x3]])
+
+probabilities = nn.Softmax(dim= -1)
+output = probabilities(input_tensor)
+~~~
+
+## 
