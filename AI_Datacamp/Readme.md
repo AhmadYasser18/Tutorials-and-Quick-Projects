@@ -224,6 +224,7 @@ criterion = CrossEntropyLoss()
 loss= criterion(prediction, target)
 
 loss.backward()
+
 #Accessing each layer's gradient
 model[0].weight.grad, model[0].bias.grad
 model[1].weight.grad, model[1].bias.grad
@@ -260,10 +261,106 @@ Loss functions used in deep learning are not convex. To find global minimum of n
 - .parameters() returns an iterable of all model parameters which are passed to the optimizer.
 - a standard learning rate, "lr" is used here which is tunable.
 - The optimizer calculates gradients, and updates model parameters automatically, by calling .step(). 
-~~~python'
+~~~python
 import torch.optim as optim
 
 optimizer = optim.SGD(model.parameters(), lr=0.001)
 optimizer.step()
 ~~~
 
+## Writing Training loop
+
+Training a neural network
+- create a model
+- choose a loss function
+- create a dataset
+- define an optimizer
+- run a training loop over each element of the dataset
+  - calculate the loss
+  - compute local gradients
+  - update model parameters
+  
+This final step is repeated a certain number of times, and is called the training loop. In scikit-learn, the training loop is located in the **.fit()** method of the model. We'll have to implement our own training loop in PyTorch.
+
+Assuming a regeression oriblem:
+Since the target is not a category but a continuous quantity, mostly the same neural network structure for regression and classification problems are used but:
+- softmax or sigmoid activation can't be used for the last activation function as they are only used in classification problems.
+- the last layer will be a linear layer.
+- a new loss function is required, because cross entropy loss is also solely used for classification problems.
+
+### Mean Squared Error Loss
+Mean squared error (MSE) loss can be used for regression problems. *It is used in scikit-learn when calling the .fit method on a linear regression model.* The MSE loss is the mean of the squared difference between predictions and ground truth, as shown in this Python implementation. 
+~~~python
+def mse(pred, target):
+    return np.mean((pred-target)**2)
+~~~
+
+The **nn.MSELoss** function is also available in PyTorch and can be used as a criterion similarly to cross entropy loss, where prediction and targets must be a float tensor.
+~~~python
+criterion = nn.MSELoss()
+# Prediction and target are float numbers
+loss = criterion(prediction, target)
+~~~
+
+Putting everything together:
+- Having two NumPy arrays, "features" and "target", containing  data and labels.
+- Pass these to a class called **"TensorDataset"** which is used to organize the features and targets into the right data types(floats). This casting is required, and float is the data type used by the parameters of our model.
+- The dataset is loaded into a different class: **DataLoader()**, used to create "batches" of data, that are passed through the model in each forward/backward pass. Selection of batch size is customizable depending on the use case.
+- Create the model next. For a dataset having four input features and one target. Because this is a regression problem, one-hot encoding isn't needed and the final linear layer outputs a single float.
+- Finally, create the mean square loss criterion and the optimizer. A ten to minus three learning rate is a good default learning rate for most deep learning problems.
+- **Looping:**
+   -  For each epoch, we loop through the dataloader.
+   -  Each iteration of the dataloader provides a batch of samples.
+   -  Before the forward pass, gradients are set to zero using optimizer.zero_grad(), because the optimizer stores gradients from previous steps by default.
+   -  Features and targets are obtained from each sample of the dataloader.
+   -  Features are used for the forward pass of the model, and the target is used for the loss calculation.
+   -  The optimizer is used to update the parameters of the model.
+  
+~~~python
+#Create dataset and dataloader
+dataset = TensorDataset(torch.tensor(features).float(), torch.tensor(target).float())
+dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
+#Create model
+model = nn.Sequential(nn.Linear(4,2),
+                      nn.Linear(2,1)
+)
+#Create the loss and optimizer 
+criterion = nn.MSELoss()
+optimizer = optim.SGD(model.parameters(), lr=0.001)
+
+#Loop through the dataset
+
+for epoch in range(num_epochs):
+    for data in dataloader:
+        #Set the gradients to zero
+        optimizer.zero_grad()
+        #Get feature and target from dataloader
+        feature, target = data
+        #Run a forward pass
+        pred = model(features)
+        #Compute loss and gradients
+        loss = criterion(pred, target)
+        loss.backward()
+        #Update parameters
+        optimizer.step() 
+~~~
+Looping through the entire dataset once is called an **epoch** and we train over multiple epochs, indicated by num_epochs.
+
+## Activation functions between layers
+### Limitations of the sigmoid and softmax function
+The outputs of the sigmoid are bounded between zero and one, meaning that for any input, the output will be greater than zero and less than one. Unlike the softmax function, it can be used anywhere in the network. 
+
+![image](https://github.com/user-attachments/assets/a7bb11e9-07d9-499a-94bc-d90f4d579973)
+
+When plotting out the derivatives of the sigmoid function, notice that the gradients are always low and approach zero for low and high values of x. This behavior is called **saturation**. This property of the sigmoid function creates a challenge during backpropagation because each local gradient is a function of the previous gradient. For high and low values of x, the gradient will be so small that it can prevent the weight from changing or updating. This phenomenon is called vanishing gradients and makes training the network challenging. 
+Because each element of the output vector of a softmax activation function is also bounded between zero and one, the softmax also saturates.
+
+### ReLU Function
+The rectified linear unit or ReLU function outputs the maximum between its input and zero, as shown by the graph. For positive inputs, the output of the function is equal to the input. For strictly negative outputs, the output of the function is equal to zero. This function does not have an upper bound and the gradients do not converge to zero for high values of x, which overcomes the vanishing gradients problem. In PyTorch, the ReLU function may be called using
+~~~python relu = nn..ReLU() ~~~ ReLU is a good default choice of activation for many deep learning problems.
+
+![Uploading image.png…]()
+
+4. Introducing Leaky ReLU
+02:01 - 02:33
+The leaky ReLU is a variation of the ReLU function. For positive inputs, it behaves similarly to the ReLU function. For negative inputs, however, it multiplies them by a small coefficient (defaulted to zero.zero-one in PyTorch). By doing this, the leaky ReLU function has non-null gradients for negative inputs. In PyTorch, the leaky ReLU function is called using the nn module as well. The negative_slope parameter indicates the coefficient by which negative inputs are multiplied.
