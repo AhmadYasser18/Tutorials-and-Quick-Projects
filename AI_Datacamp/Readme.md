@@ -371,4 +371,29 @@ leaky_relu = nn.LeakyReLU(neagtive_slope=0.05)
 ~~~
 The negative_slope parameter indicates the coefficient by which negative inputs are multiplied.
 
-## 
+## 1. A deeper dive into neural network architecture
+When each neuron of the layer is connected to each neuron of the previous layer, they are called fully connected layers. Each neuron of a linear layer will compute a linear operation using all the neurons of the previous layer. Therefore, a single neuron has N+1 learnable parameters, with N being the output dimension of the previous layer, plus one for the bias.
+
+Fully connected neural networks are made of three types of layers: 
+- an input layer: which contains the dataset features
+- an output layer: which contains the model predictions
+- hidden layers: which are any layers that are not the input or the output.
+
+When designing a neural network, the dimensions of the input layer and output layer are fixed for us. The number of neurons in the input layer is the number of features in our dataset, and the number of neurons in the output layer is the number of classes we want to predict. However, we can add as many hidden layers as we want, as long as the input dimension of a layer matches the output dimension of the previous one. Increasing the number of hidden layers increases the number of parameters in the model which is also called increasing model capacity. Models with more capacity can work with more complex datasets.
+
+A good metric to assess the capacity of our model is the total number of parameters. Let's consider this model made of two layers. 
+~~~python
+model = nn.Sequential(nn.Linear(8,4),
+                      nn.Linear(4,2)
+)
+~~~
+We can manually count the parameters: the first layer has 4 neurons, and each of them has 9 learnable parameters so it contains 36 parameters. The second layer has 2 neurons, each of them having 5 learnable parameters. In total, this model has 46 learnable parameters.
+The same calculation can be done in PyTorch using the **.numel** method of tensors, which returns the number of elements in the tensor. By looping over the model parameters, we can add the number of elements per parameter to the total variable, and verify that it also adds up to 46.
+~~~python
+total = 0
+for parameter in model.parameters():
+    total+= parameter.numel()
+~~~
+When iterating on a deep learning model, we will often play with the number of hidden layers. However, remember that a bigger model will take longer to train.
+
+##
