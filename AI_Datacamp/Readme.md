@@ -350,17 +350,25 @@ Looping through the entire dataset once is called an **epoch** and we train over
 ### Limitations of the sigmoid and softmax function
 The outputs of the sigmoid are bounded between zero and one, meaning that for any input, the output will be greater than zero and less than one. Unlike the softmax function, it can be used anywhere in the network. 
 
-![image](https://github.com/user-attachments/assets/a7bb11e9-07d9-499a-94bc-d90f4d579973)
+![image](https://github.com/user-attachments/assets/28dfca75-6ad5-49be-bf34-6e2c4ceec994)
 
 When plotting out the derivatives of the sigmoid function, notice that the gradients are always low and approach zero for low and high values of x. This behavior is called **saturation**. This property of the sigmoid function creates a challenge during backpropagation because each local gradient is a function of the previous gradient. For high and low values of x, the gradient will be so small that it can prevent the weight from changing or updating. This phenomenon is called vanishing gradients and makes training the network challenging. 
 Because each element of the output vector of a softmax activation function is also bounded between zero and one, the softmax also saturates.
 
 ### ReLU Function
 The rectified linear unit or ReLU function outputs the maximum between its input and zero, as shown by the graph. For positive inputs, the output of the function is equal to the input. For strictly negative outputs, the output of the function is equal to zero. This function does not have an upper bound and the gradients do not converge to zero for high values of x, which overcomes the vanishing gradients problem. In PyTorch, the ReLU function may be called using
-~~~python relu = nn..ReLU() ~~~ ReLU is a good default choice of activation for many deep learning problems.
+~~~python
+relu = nn.ReLU()
+~~~
+ReLU is a good default choice of activation for many deep learning problems.
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/39cab2c1-e47a-4c89-ada2-52157210c990)
 
-4. Introducing Leaky ReLU
-02:01 - 02:33
-The leaky ReLU is a variation of the ReLU function. For positive inputs, it behaves similarly to the ReLU function. For negative inputs, however, it multiplies them by a small coefficient (defaulted to zero.zero-one in PyTorch). By doing this, the leaky ReLU function has non-null gradients for negative inputs. In PyTorch, the leaky ReLU function is called using the nn module as well. The negative_slope parameter indicates the coefficient by which negative inputs are multiplied.
+**Leaky ReLU**
+The leaky ReLU is a variation of the ReLU function. For positive inputs, it behaves similarly to the ReLU function. For negative inputs, however, it multiplies them by a small coefficient (defaulted to zero.zero-one in PyTorch). By doing this, the leaky ReLU function has non-null gradients for negative inputs. In PyTorch, the leaky ReLU function is called using:
+~~~python
+leaky_relu = nn.LeakyReLU(neagtive_slope=0.05)
+~~~
+The negative_slope parameter indicates the coefficient by which negative inputs are multiplied.
+
+## 
