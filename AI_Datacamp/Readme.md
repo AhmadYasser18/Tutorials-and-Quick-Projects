@@ -113,7 +113,7 @@ The sigmoid is commonly used as the **last step** in a neural network when perfo
 ~~~python'
 model = nn.Sequential(
     nn.Linear(6, 4),
-    nn.Linear(4, 1)
+    nn.Linear(4, 1),
     nn.Sigmoid()
 )
 ~~~
@@ -179,3 +179,91 @@ on_hot_target = tensor([[1, 0]])
 criterion = CrossEntropyLoss() #Defining loss function
 criterion(scores.double(), on_hot_target.double()
 ~~~
+
+## Using derivatives to update model parameters
+The goal of training is to minimize a loss function we define. Calculating derivatives is a core step for minimizing loss. Loss is high when a model is mispredicting while low when it's predicting correctly.
+
+Think of the loss function as a valley. Each horizontal step (along x) involves gaining or losing some height (y). 
+- **At steeper slopes**: a single step means losing or gaining a lot of elevation. Mathematically, the derivative (or slope) is high.
+- **At gentler slopes**: a single step involves losing or gaining less elevation, meaning a smaller derivative.
+- **Valley floor**: The bottom is flat, and elevation does not change at each step, the derivative is null. If the valley is our loss function, the function is at minimum when the derivative is null.
+
+So how do gradients help minimize loss, tune layer weights and biases, and improve model predictions during training?
+
+In deep learning, the term **"gradient"** is often used for derivatives. When a model is created, layer weights and biases are randomly initialized. Training looks as shown: 
+- take a dataset with features X, and target y.
+- run a forward pass using X and calculate loss by comparing model output, * yhat*, with y.
+- compute gradients of the loss function and use them to update the model parameters with backpropagation so that weights are no longer random and biases are useful.
+- repeat until the layers are tuned.
+
+![image](https://github.com/user-attachments/assets/8005e370-412b-4cbc-8534-34482d84fd3d)
+
+**Backpropagation**
+
+Consider a network of three linear layers (L0,L1,L2) local gradients can be calculated with respect to each layer's parameters. 
+- first calculate loss gradients with respect to L2,
+- then L2 to L1
+- repeat until the first layer is reached.
+
+![image](https://github.com/user-attachments/assets/e8b05f1c-e0a2-4344-9a8c-9d75239212bd)
+
+### **Implementing in PyTorch**
+
+After running a forward pass on sample data, defining a loss function, using it to compare predictions with target values, **.backward()** is used to calculate gradients using this defined loss. This populates the .grad attributes of each layer's weights and biases. Each layer in the model can be indexed separately, beginning with a zero-index. Each layer has a weight, a bias, and the corresponding gradients.
+
+~~~python
+model = nn.Sequential(
+    nn.Linear(16, 8),
+    nn.Linear(8, 4),
+    nn.Linear(4, 2),
+    nn.Softmax(dim = -1)
+)
+prediction = model(sample)
+#Calculating loss and computing gradient
+criterion = CrossEntropyLoss() 
+loss= criterion(prediction, target)
+
+loss.backward()
+#Accessing each layer's gradient
+model[0].weight.grad, model[0].bias.grad
+model[1].weight.grad, model[1].bias.grad
+model[2].weight.grad, model[2].bias.grad 
+~~~
+ **Updating model parameters**
+
+To update model parameters manually, access each layer gradient, multiply it by the learning rate, and then subtract this product from the weight. 
+
+~~~python
+lr = 0.001
+#updating weights
+weight = model[0].weight
+weight_grad = model[0].weight.grad
+weight -= lr*weight_grad
+
+#updating biases
+bias = model[0].bias
+bias_grad = model[0].bias.grad
+bias -= lr*bias_grad
+~~~
+**Convex and non-convex functions**
+
+Some functions, such as the one on the left, have one minimum and [one only], called the **"global"** minimum. These functions are "convex". Some, "non-convex" functions have more than one "local" minimum. At a local minimum, the function value is lowest compared to nearby points, but points further away may be even lower. When minimizing loss functions, our goal is to find the global minimum of the non-convex function.
+
+Convex:
+![image](https://github.com/user-attachments/assets/ca49a7f1-1f43-43f0-8f88-7f0b463ed346)
+
+non-convex:
+![image](https://github.com/user-attachments/assets/a6f9197c-0f94-4698-a133-aca0a553b4af)
+
+Loss functions used in deep learning are not convex. To find global minimum of non-convex functions **"gradient descent"** is used. PyTorch does this using "optimizers". The most common optimizer is [stochastic gradient descent] (SGD).
+- SGD is instantiate using optim.
+- .parameters() returns an iterable of all model parameters which are passed to the optimizer.
+- a standard learning rate, "lr" is used here which is tunable.
+- The optimizer calculates gradients, and updates model parameters automatically, by calling .step(). 
+~~~python'
+import torch.optim as optim
+
+optimizer = optim.SGD(model.parameters(), lr=0.001)
+optimizer.step()
+~~~
+
