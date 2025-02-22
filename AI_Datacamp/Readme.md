@@ -51,7 +51,7 @@ While a network can have any number of hidden layers, we'll begin by building a 
 2. Pass the input_tensor to a special kind of layer called a **linear layer**.  A linear layer takes an input tensor, applies a linear function to it, and returns an output. nn.linear takes two arguments: 
   -  **in_features**: the number of features in our input (three),
   -  **out_features**: specifying the desired size of the output tensor (in this case two).
-4. Pass input_tensor to linear_layer to generate an output.
+3. Pass input_tensor to linear_layer to generate an output.
 
 ~~~python
 import torch.nn as nn
@@ -134,4 +134,48 @@ probabilities = nn.Softmax(dim= -1)
 output = probabilities(input_tensor)
 ~~~
 
-## 
+## Running a forward pass
+When input data is passed through a neural network in the forward direction to generate outputs, or predictions, the input data flows through the model layers. At each layer, computations performed on the data generate intermediate representations, which are passed to each subsequent layer until the final output is generated. 
+The purpose of the forward pass is to propagate input data through the network and produce predictions or outputs based on the model's learned parameters (weights and biases). This is used for both training and generating new predictions. 
+
+In addition, there is there also a backward pass or backpropagation, which is the process by which layer weights and biases are updated during training. All this is part of something called a "training loop". This involves:
+- Propagating data forward
+- Comparing outputs to true values
+- Propagating backwards to improve each layer's weights and biases.
+
+It is repeated several times until the model is tuned with meaningful weights and biases. 
+
+## Using loss functions to assess model predictions
+In order to assess the differences between actual values and those predicted by the network **loss functions** are used.
+The loss function tells us how good the model is at making predictions during training. It takes a model prediction, y-hat, and true label, or ground truth, y, as inputs, and outputs a float.
+
+Loss is typically computed using a loss function. Consider loss function F, which takes ground truth y and prediction yhat as inputs and returns a numerical loss value. Possible values for a N-class case: true class labels y are integers (0 to N-1). yhat, on the other hand is the softmax function output. It is a tensor with the same dimensions as the number of classes N. 
+### One-hot encoding concepts
+We can use one-hot encoding to turn integer y to a tensor of zeros and ones, to compare like-for-like during evaluation. When y=0 and there are three classes, the encoded form of y=0 is [1,0,0]. The encoding is now also of shape 1 by 3, similar to yhat. We can represent this manual one-hot-encoding using a NumPy array.
+
+**Transforming labels with one-hot encoding**
+To prevent having to do this manually, we can aimport torch.nn.functional as F. \
+~~~python
+import torch.nn.functional as F
+F.one_hot(torch.tensor(0), num_classes = 3)
+#returns tensor([1,0,0])
+F.one_hot(torch.tensor(1), num_classes = 3)
+#returns tensor([0,1,0])
+~~~
+### Cross entropy loss in PyTorch
+
+The loss function takes the scores tensor as input, which is the model prediction before the final softmax function, and the one-hot encoded ground truth label. It outputs a single float, the loss of that sample. The goal of training is to minimize the loss.
+Passing the one-hot encoding along with the output predictions to a loss function. yhat is stored as the tensor "scores". 
+**Cross-entropy loss*. This is the most used loss function for classification problems. PyTorch provides the handy CrossEntropyLoss() function shown. We start by 
+- Define loss function  
+- Pass it the **.double()** of the scores tensor and the one_hot_target tensor. This casts the tensors to a specific float data type that is accepted by the CrossEntropyLoss() function.
+- The output shown is the loss value.
+~~~python
+from torch.nn import CrossEntropyLoss
+
+scrores = tensor([[-0.1211, 0.1059]])
+on_hot_target = tensor([[1, 0]])
+
+criterion = CrossEntropyLoss() #Defining loss function
+criterion(scores.double(), on_hot_target.double()
+~~~
