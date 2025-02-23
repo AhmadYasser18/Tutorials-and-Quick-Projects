@@ -476,4 +476,43 @@ for name, param in model.named_parameters():
         param.requires_grad = False
 ~~~
 
+## Loading data
+Having data stored in a csv file, it's loaded using pandas read_csv().
+We can use column indexing to return required columns. These will be the features, and can be casted to a NumPy array.
+~~~python
+features = dataset.iloc[:,x1:xn] #from column 1 to column n-1
+X = features.to_numpy()
+~~~
+Similarly, the target column is extracted and stored as an array.
+~~~python
+target = dataset.iloc[:,xn] 
+y = target.to_numpy()
+~~~
+
+torch.utils.data provides the **DataLoader()** and **TensorDataset()** classes, which are used to set data up for training a PyTorch model. TensorDataset() is a class that can be used to create a PyTorch dataset for tensors. Passing features X and target y to TensorDataset() creates a PyTorch dataset class conveniently. 
+~~~python
+import torch
+from torch.utils.data import TensorDataset
+
+#Instantiate dataset class
+dataset = TensorDataset(torch.tensor(X).float(), torch.tensor(y).float())
+
+#Accessing a sample
+sample = dataset[0] #the result is a tuple
+input_sample, label_sample = sample
+~~~
+
+Once the dataset object is created using TensorDataset(), it's passed to the DataLoader(). Defining some customizable parameters:
+- [batch_size]: determines how many samples are taken from the dataset per iteration.
+- [shuffle]: tells the dataloader to shuffle the data on each iteration.
+
+~~~python
+import torch
+from torch.utils.data import DataLoader
+
+#Create a DataLoader
+dataloader = DataLoader(dataset, batch_size=2, shuffle = True)
+~~~
+Each element of dataloader is a tuple, which can be unpacked batch_inputs and batch_labels. 
+
 ##
