@@ -411,14 +411,17 @@ Finding good values for the learning rate and momentum is critical, as bad value
 Taking the below function as an example,the SGD optimizer runs for ten steps and starts at x = -2. After ten steps:
  - the optimizer has almost found the minimum of the function.
  - the step size taken by the optimizer is getting smaller as it is getting closer to x=0. This is because the step size equals the gradient multiplied by the learning rate. At around zero, this function is not as steep and therefore the gradient is smaller.
+![optimum](https://github.com/user-attachments/assets/9d5ccc0d-0b50-446f-9a1f-41b08ee395ff)
 
 
 - small learning rate
-  
+![small](https://github.com/user-attachments/assets/eedb74ee-2a72-4928-9ef5-e63955aa312b)
+
 For a learning rate ten times smaller, the minimum of the function is still far away after ten steps. The optimizer will take much longer to find the function's minimum.
 
 - high learning rate
- 
+ ![high](https://github.com/user-attachments/assets/bd80f8cf-7067-4ec9-91ab-2e7573345da4)
+
 For a high value for the learning rate, the optimizer cannot find the minimum and bounces back and forth on both sides of the function.
 
 Typical learning rate values range from ten raised to -2, to ten raised to -4.
@@ -428,6 +431,49 @@ Typical learning rate values range from ten raised to -2, to ten raised to -4.
 
 As loss functions are non-convex. One of the challenges when trying to find the minimum of a non-convex function is getting stuck in a local minimum. 
 For a null momentum on, the optimizer gets stuck in this first dip of the function, which is not its global minimum.
+![null](https://github.com/user-attachments/assets/5145085f-7cd0-47f9-a43c-4d3210168310)
+However, when using a momentum of 0.9, the minimum of the function can be found. This parameter provides momentum to the optimizer enabling it to overcome local dips. The momentum keeps the step size large when previous steps were also large, even if the current gradient is small.
+![non null](https://github.com/user-attachments/assets/cfda3864-5a38-45d8-a356-122e821077ce)
 
-However, when using a momentum of zero.nine, the minimum of the function can be found. This parameter provides momentum to the optimizer enabling it to overcome local dips. The momentum keeps the step size large when previous steps were also large, even if the current gradient is small.
 Momentum usually ranges from 0.85 to 0.99.
+
+## Layers initialization, transfer learning and fine tuning
+**Layer initialization**
+
+Similarly to data normalization, the weights of a linear layer are also normalized. For example creating a small linear layer and looking at the minimum and maximum values of its weights, it's observed that the layer weights are initialized to small values.
+
+In general, when training a neural network, weights of each layer are initialized to small values. The output of a neuron in a linear layer is a weighted sum of the outputs of the previous layer. Keeping both the input data and the layer's weights small ensures that the outputs of layers remain small. A layer can be initialized in different ways, for example using the uniform distribution. 
+~~~python
+import torch.nn as nn
+
+layer = nn.Linear(64, 128)
+print(layer.weight.min(), layer.weight.max()) 
+~~~
+
+Pytorch provides an easy way to initialize layers weights with the nn.init module.
+~~~python
+import torch.nn as nn
+
+layer = nn.Linear(64, 128)
+nn.init.uniform_(layer.weight)
+~~~
+
+### Transfer learning and fine tuning
+
+In practice, machine learning engineers are rarely training a model from randomly initialized weights. Instead they rely on a very powerful concept called **transfer learning**. Transfer learning consists in taking a model that was trained on a first task and reuse for a second task. 
+
+Instead of training a model using randomly initialized weights, weights can be loaded from the first model and used as a starting point to train on a new dataset. Saving and loading weights in pytorch can be done using the **torch.save** and the **torch.load** These functions works on any type of pytorch objects, whether it's a single layer or a full model.
+
+Sometimes, the second task is similar to the first task and it is required to perform a specific type of transfer learning, called **fine-tuning**. In this case, weights are loaded from a previously trained model, but the model is trained with a smaller learning rate. A part of a network can be trained, if it's decided some of the network layers do not need to be trained and choose to freeze them. A rule of thumb is to freeze early layers of the network and fine-tune layers closer to the output layer. This can be achieved by setting each parameter's requires_grad attribute to False. Here, we use the model's named_parameters() method, which returns the name and the parameter itself. We set requires_grad of the first layer's weight to False.
+~~~python
+import torch.nn as nn
+
+model = nn.Sequential(Linear(64, 128),
+                      Linear(128, 256))
+
+for name, param in model.named_parameters():
+    if name == '0.weight':
+        param.required_grad = False
+~~~
+
+##
