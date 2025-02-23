@@ -396,4 +396,38 @@ for parameter in model.parameters():
 ~~~
 When iterating on a deep learning model, we will often play with the number of hidden layers. However, remember that a bigger model will take longer to train.
 
-##
+## Learning rate and momentum
+The model's architecture impacts the training process and the model's performance. Training a neural network involves solving an optimization problem where the goal is to minimize the loss function by tweaking the model's parameters. 
+To do this, an algorithm called [stochastic gradient descent], or SGD was used. The optimizer takes:
+- the model's parameters
+- the learning rate: which controls the step size taken by the optimizer
+- the momentum: which controls the inertia of the optimizer.
+
+Finding good values for the learning rate and momentum is critical, as bad values can lead to longer training times, or bad overall performance. 
+
+**Impact of the learning rate:** 
+- optimal learning rate
+
+Taking the below function as an example,the SGD optimizer runs for ten steps and starts at x = -2. After ten steps:
+ - the optimizer has almost found the minimum of the function.
+ - the step size taken by the optimizer is getting smaller as it is getting closer to x=0. This is because the step size equals the gradient multiplied by the learning rate. At around zero, this function is not as steep and therefore the gradient is smaller.
+
+
+- small learning rate
+  
+For a learning rate ten times smaller, the minimum of the function is still far away after ten steps. The optimizer will take much longer to find the function's minimum.
+
+- high learning rate
+ 
+For a high value for the learning rate, the optimizer cannot find the minimum and bounces back and forth on both sides of the function.
+
+Typical learning rate values range from ten raised to -2, to ten raised to -4.
+
+
+**Impact of momentum**
+
+As loss functions are non-convex. One of the challenges when trying to find the minimum of a non-convex function is getting stuck in a local minimum. 
+For a null momentum on, the optimizer gets stuck in this first dip of the function, which is not its global minimum.
+
+However, when using a momentum of zero.nine, the minimum of the function can be found. This parameter provides momentum to the optimizer enabling it to overcome local dips. The momentum keeps the step size large when previous steps were also large, even if the current gradient is small.
+Momentum usually ranges from 0.85 to 0.99.
