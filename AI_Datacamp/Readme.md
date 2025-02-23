@@ -473,7 +473,7 @@ model = nn.Sequential(Linear(64, 128),
 
 for name, param in model.named_parameters():
     if name == '0.weight':
-        param.required_grad = False
+        param.requires_grad = False
 ~~~
 
 ##
