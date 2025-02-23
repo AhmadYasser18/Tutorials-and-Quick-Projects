@@ -515,4 +515,83 @@ dataloader = DataLoader(dataset, batch_size=2, shuffle = True)
 ~~~
 Each element of dataloader is a tuple, which can be unpacked batch_inputs and batch_labels. 
 
-##
+## Evaluating model performance
+When starting a machine learning project, datasetis is to be split into three subsets: [training], [validation], and [testing]. 
+- During training, model parameters are adjusted (weights and biases).
+- During validation, hyperparameters are tuned, such as learning rate and momentum.
+- The test dataset is used only once to calculate final metrics.
+
+### Model evaluation metrics
+For now, the focus will be on evaluating the following metrics in PyTorch: 
+- loss during training and validation
+- accuracy during training and validation.
+
+In classification tasks, accuracy is a measure of how well a model correctly predicts ground truth labels.
+
+**Calculating training loss**
+Loss is calculated by summing up loss at each iteration of the dataloader. At the end of each epoch, the mean value of the training loss is calculated. In PyTorch: 
+- begin by initializing training loss to zero.
+- iterate through the training dataloader, run a forward pass
+- compute the loss.
+- calculate gradients and update weights
+- add the current loss to the previous training losses.
+
+The loss tensor's .item() method returns the Python number contained in the tensor. One complete loop through the data loader is one epoch. Mean loss is calculated by dividing total training_loss by the dataloader's length: the number of batches in the dataset.
+~~~python
+training_loss = 0.0
+for i, data in enumerate(trainloader,0):
+    #Run forward pass
+    .......
+    #Calculate loss
+    loss = criterion(outputs, labels)
+    #Calculate gradients
+    .......
+    #Calculate and sum the loss
+    training_loss+=loss.item()
+
+epoch_loss = training_loss/len(trainloader)
+~~~
+
+**Calculating validation loss**
+A similar approach is taken to calculate validation loss. After each training epoch, we then iterate over the dataloader containing the validation dataset. 
+- The model.eval is used to put the model in evaluation mode, because some layers in PyTorch models behave differently at training versus validation stages.
+- add a Python context with torch.no_grad, indicating we will not be performing gradient calculation in this epoch.
+
+Validation loss is then calculated similarly to training loss. We set the model back to training mode at the end of the validation epoch, so we can run another training epoch.
+~~~python
+val_loss = 0.0
+model.eval() #putting model in evaluatoin mode
+with torch.no_grad(): #Speedpup forward pass
+ for i, data in enumerate(trainloader,0):
+     #Run forward pass
+     .......
+     #Calculate loss
+     loss = criterion(outputs, labels)
+     val_loss+=loss.item()
+ 
+epoch_loss = val_loss/len(trainloader)
+model.train()
+~~~
+**Overfitting**
+Keeping track of validation and training losses during training helps in detecting overfitting. Overfitting occurs when the model stops generalizing and performance on the validation dataset degrades. This figure shows overfitting happens when validation loss is high but training loss is not.
+
+![image](https://github.com/user-attachments/assets/a9f23411-4657-4b52-b9bc-3a767830aa31)
+
+**Calculating accuracy with torchmetrics**
+In addition to loss, keep track of other metrics to evaluate how well the model is at predicting correct answers. To do so, **torchmetrics** is used. 
+
+For classification, it's used to create an accuracy metric. On each iteration of dataloader, we call this metric using model outputs and ground truth labels. The accuracy metric takes probabilities and single number labels as inputs. The output variable here would be the probabilities returned by the softmax function. If the labels contain one-hot encoded classes, we'll need the argmax function to obtain numbers instead of one-hot vectors. At the end of the epoch, we calculate total accuracy using the metric's .compute() method. Finally, we use .reset() to reset the metric for the next epoch. Accuracy is calculated in the same way for training and validation.
+
+~~~python
+import torchmetrics
+
+metric = torchmetrics.Accuracy(task="multiclass", num_classes=3) 
+
+for i, data in enumerate(trainloader,0):
+    features, labels =data
+    outputs = model(features)
+    #Calculate accuracy over batch
+    acc = metric(outputs, labels.argmax(dim=-1)
+#Calculate accuracy over whole epoch
+acc.compute()
+~~~
