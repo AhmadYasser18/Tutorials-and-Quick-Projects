@@ -123,7 +123,7 @@ Sigmoid is used for binary classification. For multiclass classification, involv
 In this model softmax takes a n-dimensional pre-activation and generates an output of the same shape, one by n.
 
 The output is a probability distribution because each element is between zero and one, and values sum to one.
-In PyTorch, we use nn.Softmax(). dim equals -1 indicates that softmax is applied to input_tensor's last dimension. Similar to sigmoid, softmax can be the last layer in nn.Sequential.
+In PyTorch, we use `nn.Softmax()`. dim equals -1 indicates that softmax is applied to input_tensor's last dimension. Similar to sigmoid, softmax can be the last layer in nn.Sequential.
 ~~~python'
 import torch
 import torch.nn as nn
