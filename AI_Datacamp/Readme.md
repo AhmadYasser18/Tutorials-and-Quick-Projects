@@ -667,8 +667,11 @@ Once an accepted performance is reached, fine-tuning can be done to the differen
 for factor range(2,6):
   lr = 10** - factor
 ~~~
-Random search can also be used, which randomly samples parameters between intervals. ~~~python
+Random search can also be used, which randomly samples parameters between intervals. 
+~~~python
 factor = np.random.uniform(2,6)
 lr = 10** - factor
 ~~~
 The random search approach often leads to better results.
+
+##
