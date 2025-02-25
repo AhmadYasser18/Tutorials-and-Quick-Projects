@@ -595,3 +595,38 @@ for i, data in enumerate(trainloader,0):
 #Calculate accuracy over whole epoch
 acc.compute()
 ~~~
+
+## Overfitting
+**Reasons for overfitting**
+Overfitting happens when the model does not generalize to unseen data. If model is not trained correctly, it will start to memorize the training data, which leads to good performance on the training set but poor performance on the validation set. Several factors can lead to overfitting: 
+- a small dataset
+- a model with too much capacity
+- large values of weights
+
+Countering overfitting:
+- model size can be reduced
+- adding a new type of layer **dropout**
+- using weight decay to force the parameters to remain small.
+- Getting more data or using data augmentation
+
+**"Regularization" using a dropout layer**
+A common way to fight overfitting is to add dropout layers to our neural network. Dropout is a "regularization" technique where randomly, a fraction of input neurons is set to zero at each update, effectively "dropping" them out. Corresponding connections are temporarily removed from the network, making the network less likely to overly rely on specific features. 
+~~~python
+import torch.nn as nn
+
+model = nn.Sequential(Linear(8, 4),
+                      nn.ReLU(),
+                      nn.Dropout(p=0.5)) #p indicates the probability of setting a neuron to zero.
+features = torch.randn((1, 8))
+model(i)
+~~~
+Dropout can be added to models as shown. The  Usually, dropout layers are added after activation functions. Dropout layers behave differently between training and evaluation thus switching the model mode must not be forgotten. model.eval() / model.train()
+
+**Regularization with weight decay**
+~~~python
+optimizer = optim.SGD(model.parameters(), lr = 1e-3, weight_decay= 1e-4)
+~~~
+In PyTorch, weight decay can be added to the optimizer as shown. It is controlled by the **weight_decay** parameter (ranging between 0 and 1 but is typically very small). When the optimizer's weight_decay parameter is set, it adds an additional term to the parameter update step that encourages smaller weights. This regularization term is proportional to the current value of the weight, and it is subtracted from the gradient during backpropagation. The weight decay term effectively penalizes large weights and helps prevent overfitting. The higher we set this parameter, the less likely our model is to overfit, so the model can generalize better to new data.
+
+**Data augmentation**
+Getting more data can be costly. However, researchers have found a way to artificially increase the size and diversity of their dataset by using data augmentation. Data augmentation is commonly applied to image data, which can be rotated and scaled, so that different views of the same face become available as "new" data points.
