@@ -630,3 +630,45 @@ In PyTorch, weight decay can be added to the optimizer as shown. It is controlle
 
 **Data augmentation**
 Getting more data can be costly. However, researchers have found a way to artificially increase the size and diversity of their dataset by using data augmentation. Data augmentation is commonly applied to image data, which can be rotated and scaled, so that different views of the same face become available as "new" data points.
+
+## Improving model performance
+
+**- Steps to maximize performance**
+When facing a new deep learning challenge, a series of steps should be followed to make sure that the best possible outcomewe is reached.
+1. create a model that can overfit the training set. This ensures that the problem is solvable as well as setting a performance baseline to aim for with the validation set.
+2. reduce overfitting to increase performance on the validation set.
+3. slightly adjust the different hyperparameters to make sure the best possible performance is achieved.
+
+**Step 1: overfit the training set**
+Before overfitting the whole training set, it is recommended to overfit a single data point. This can be done by slightly modifying the training loop such that it does not iterate through the dataloader anymore. 
+~~~python
+features, labels = next(iter(trainloader))
+for i range(1e3):
+  outputs = model(features)
+  loss = criterion(outputs, labels)
+  optimizer.step()
+~~~
+Overfitting a single data point should give an accuracy of one and a loss close to zero. It should also help find any potential bugs in the code if these values are not reached.  At this stage, it's best not to experiment with the model architecture but rather use an existing one if possible. The model should be large enough such that it can overfit the training set. Similarly, the different hyperparameters such as the learning rate should be kept to their defaults.
+
+**Step 2: reduce overfitting**
+After ensuring that the problem is solvable with deep learning.,it's required to create a model that generalizes well to maximize the validation accuracy. Experiment with:
+- dropout
+- data augmentation
+- weight decay
+- or reducing the model capacity.
+
+Keep track of the different parameters and the corresponding validation accuracy for each set of experiments. Commonly, the different overfitting reduction strategies lead to a significant drop in performance, as shown here. On the left is the original model overfitting the training set. On the right is the results of a model trained to reduce overfitting. The performance on both validation and training sets are much worse. This highlights the importance of keeping track of the different metrics when trying to find the best model.
+![image](https://github.com/user-attachments/assets/9d2ee4c3-e578-48b0-bfea-775b9937ffdd)
+![image](https://github.com/user-attachments/assets/f862a493-8149-4d4e-b3bf-7b3430d4def9)
+
+**Step 3: fine-tune hyperparameters**
+Once an accepted performance is reached, fine-tuning can be done to the different hyperparameters. If sufficient computational capacity is available, a grid search over the different hyperparameters can be done. Usually, this is done on the optimizer parameters such as the learning rate or momentum. The grid search will use values of the parameters at a constant interval. For example, experiment with every momentum value between 0.85 and 0.99 with a constant interval. The learning rate is chosen between 10e-2 and 10e-6. 
+~~~python
+for factor range(2,6):
+  lr = 10** - factor
+~~~
+Random search can also be used, which randomly samples parameters between intervals. ~~~python
+factor = np.random.uniform(2,6)
+lr = 10** - factor
+~~~
+The random search approach often leads to better results.
