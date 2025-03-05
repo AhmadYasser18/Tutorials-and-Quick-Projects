@@ -1,5 +1,5 @@
 # Data Structure
-are data organization, managementand storage format that enables efficient access and modification [Access, Insertion, Deletion, Search].
+are data organization, management and storage format that enables efficient access and modification [Access, Insertion, Deletion, Search].
 
 ## Types:
 - Primitve Data structures:
@@ -7,6 +7,7 @@ are data organization, managementand storage format that enables efficient acces
   - float
   - character
   - pointers
+
 - Non-Primitve Data structures:
   - Linear Data structures:
     - Array
