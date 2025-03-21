@@ -49,8 +49,10 @@ int main() {
     */
 
     string name = "Ahmad";
-    
+
     cout<<"Hello "<<name<<endl;
-    
+    ///////////////////////////////
+    const int pi= 3.14; //returns error in case variable is to be changed later 
+
     return 0;
 }
