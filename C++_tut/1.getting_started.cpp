@@ -109,7 +109,7 @@ int main() {
     cin.ignore();  // Ignores leftover newline
     cin.clear();
 
-    std::getline(std::cin, name); 
+    std::getline(std::cin>>std::ws, name); 
     cout<<"Hello "<<name<<endl; //"Hello A Y" is returned
 
     return 0;

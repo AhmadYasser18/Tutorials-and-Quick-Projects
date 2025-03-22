@@ -26,4 +26,6 @@ Using:
 
 **refer:** [cplusplus.com/reference/cmath](cplusplus.com/reference/cmath) for more functions
 
-# 5.
+## 5. If-Else & Switch Statements
+
+## 6. 
