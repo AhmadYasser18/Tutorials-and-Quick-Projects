@@ -54,5 +54,48 @@ int main() {
     ///////////////////////////////
     const int pi= 3.14; //returns error in case variable is to be changed later 
 
+    //////////////////////////////
+    //Operators
+
+    int sum = a +b; //15
+
+    sum = sum + 1; //adds one
+    sum+= 1; //adds one
+    sum ++; //adds one
+
+    int remainder = sum%4;
+    cout<<sum<<endl<<remainder<<endl;
+
+    //Order: parenthesis > multiplication or division > addition or subtraction
+    //////////////////////////////
+    /* Type conversion : conversion of one data type ro another
+                        Implicit: automatic
+                        Explicit: precede value with data type
+    */
+
+    int x1 = 3.14; //changes to 3 as int only accepts whole numbers (implicit)
+
+    double x2 = (int) 3.14; //explicit
+
+    cout<<"x1 "<<x1<<"_x2 "<<x2<<endl;
+
+    x1 = 2.5; //returns 2
+    x2 = 2.5; //returns 2.5 as type is double
+    cout<<"x1 "<<x1<<"_x2 "<<x2<<endl;
+
+    char x3 = 100; //returns ASCII 100
+
+    //when dividing integers:
+    int m1 = 2;
+    int m2 = 4;
+    
+    cout<<m1/m2; //return 0
+    cout<< double(m1)/m2<<endl; //returns 0.5
+
+
+
+
+
+
     return 0;
 }
