@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 /* main() function: where the execution of
@@ -91,11 +92,25 @@ int main() {
     
     cout<<m1/m2; //return 0
     cout<< double(m1)/m2<<endl; //returns 0.5
+    //////////////////////////////
+    //Taking input from user
+    
+    cout<<"What is your name? ";
+    cin>>name;
+    cout<<"Hello "<<name<<endl;
 
+    cout<<"What is your full name? ";
+    cin>>name; //If "A Y" is entered
+    cout<<"Hello "<<name<<endl; //"Hello A" is returned
 
+    //to get full line
+    cout<<"What is your full name? ";
+    
+    cin.ignore();  // Ignores leftover newline
+    cin.clear();
 
-
-
+    std::getline(std::cin, name); 
+    cout<<"Hello "<<name<<endl; //"Hello A Y" is returned
 
     return 0;
 }
