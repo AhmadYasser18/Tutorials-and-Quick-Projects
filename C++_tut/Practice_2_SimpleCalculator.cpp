@@ -2,7 +2,7 @@
 
 int main(){
 
-    int x, y;
+    float x, y;
     char op;
 
     std::cout<<"Enter in the following format:\nX + Y\nWhere X and Y are numbers and + could be [+ - * /]\nMake sure to leave spaces."<<std::endl;
@@ -24,7 +24,7 @@ int main(){
         break;
 
     case '/':
-        std::cout<<double(x)/y;
+        std::cout<<x/y;
         break;
     default:
         std::cout<<"Enter operator from (- +  /)";

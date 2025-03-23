@@ -27,5 +27,9 @@ Using:
 **refer:** [cplusplus.com/reference/cmath](cplusplus.com/reference/cmath) for more functions
 
 ## 5. If-Else & Switch Statements
+- Logical Operators
+- If/else
+- Switch
+- Ternary operator
 
-## 6. 
+## 6. String Methods
