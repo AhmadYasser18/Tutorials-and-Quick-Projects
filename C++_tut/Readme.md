@@ -33,3 +33,13 @@ Using:
 - Ternary operator
 
 ## 6. String Methods
+- Length
+- Empty
+- Clear
+- Append
+- At
+- Insert
+- Find
+- Erase
+
+**refer:** [cplusplus.com/reference/string/string](https://cplusplus.com/reference/string/string/) for more about strings
