@@ -43,3 +43,10 @@ Using:
 - Erase
 
 **refer:** [cplusplus.com/reference/string/string](https://cplusplus.com/reference/string/string/) for more about strings
+
+## 7. Loops
+- while loop
+- do-while loop
+- for loop
+
+## 8.
