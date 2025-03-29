@@ -49,4 +49,8 @@ Using:
 - do-while loop
 - for loop
 
-## 8.
+## 8. Random Numbers
+- Random
+- Random Seed
+
+## 9. Functions
