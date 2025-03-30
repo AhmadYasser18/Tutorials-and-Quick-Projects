@@ -54,3 +54,5 @@ Using:
 - Random Seed
 
 ## 9. Functions
+- Declaring Functions
+- Overloaded Functions
