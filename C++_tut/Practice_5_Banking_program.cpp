@@ -18,7 +18,7 @@ int main(){
         std::cout<<"Hello user!\nWhat would you like to do?\n1:Deposit  2:Withdraw  3:Check Balance\n";
         std::cin>>op;
 
-        while (op!= 1 || op!=2 || op!=3)
+        while (op!= 1 && op!=2 && op!=3)
         {
             std::cout<<"Please enter one of the following?\n1:Deposit  2:Withdraw  3:Check Balance\n";
             std::cin>>op;
@@ -42,16 +42,19 @@ int main(){
             break;
         }
 
-        std::cout<<"Do you want to do any more transactions?\nY:1, N:0 ";
+        std::cout<<"Do you want to do any more transactions?\nY:1   N:0 ";
         std::cin>>exit;
 
     } while (exit);
+
+    std::cout<<"Thank You.";
 
     return 0;
 }
 
 
 float deposit(float balance){
+
     float amount;
 
     std::cout<<"Please enter amount to be deposited: ";
@@ -63,16 +66,21 @@ float deposit(float balance){
     }
 
     balance+=amount;
-    std::cout<<amount<<"have been successfully deposited.";
+    std::cout<<amount<<" have been successfully deposited.\n";
 
     return balance;
 }
 
 float withdraw(float balance){
+
+    if (balance == 0){
+        std::cout<<"Empty Balance.\n";
+        return 0;
+    }
     
     float amount;
 
-    std::cout<<"Please enter amount to be withdrawn: ";
+    std::cout<<"\nPlease enter amount to be withdrawn: ";
     std::cin>>amount;
     
     while( amount < 0 || amount > balance){
@@ -90,11 +98,11 @@ float withdraw(float balance){
 
     }
     balance-=amount;
-    std::cout<<amount<<"have been successfully withdrawn.";
+    std::cout<<amount<<"have been successfully withdrawn.\n";
 
     return balance;
 }
 
 void show_balance(float balance){
-    std::cout<<"Your remaining balance is: "<<balance;
+    std::cout<<"\nYour remaining balance is: "<<balance<<std::endl;
 }
