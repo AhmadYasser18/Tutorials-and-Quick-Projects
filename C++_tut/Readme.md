@@ -56,3 +56,4 @@ Using:
 ## 9. Functions
 - Declaring Functions
 - Overloaded Functions
+- Global/Local variables

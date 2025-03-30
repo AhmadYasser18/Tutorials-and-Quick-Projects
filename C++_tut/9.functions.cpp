@@ -1,5 +1,8 @@
 #include <iostream>
 
+std::string name = "User1"; //name is now a global variable which can be accessed by other functions
+                            // Note that:   - functions can't look into other functions' variables
+                            //              - if a local variable having the same name exists it will be used first
 
 void greet(); //if function is placed after main(), it must be declared in order not to raise an error
 void greet_name(std::string user_name);
@@ -19,6 +22,7 @@ int main(){
     std::cin>>name;
 
     greet_name(name);
+    greet_name(::name); //:: to use global variable
 
     float length = 10;
     float area;
@@ -48,7 +52,7 @@ float square(float side){
 //Functions Overloading:
 
 void bakePizza(){
-    std::cout << "Here is your pizza!\n";
+    std::cout <<name<< ". Here is your pizza!\n";
 }
 void bakePizza(std::string topping1){
     std::cout << "Here is your " << topping1 << " pizza!\n";
