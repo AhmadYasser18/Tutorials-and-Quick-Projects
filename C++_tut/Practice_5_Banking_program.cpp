@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 float deposit(float balance);
 float withdraw(float balance);
@@ -7,7 +8,7 @@ void show_balance(float balance);
 int main(){
 
     std::string name;
-    float balance = 0;
+    float balance = 0.00;
 
     float amount;
     
@@ -28,10 +29,12 @@ int main(){
         {
         case 1:
             balance = deposit(balance);
+            show_balance(balance);
             break;
         
         case 2:
             balance = withdraw(balance);
+            show_balance(balance);
             break;
         
         case 3:
@@ -104,5 +107,5 @@ float withdraw(float balance){
 }
 
 void show_balance(float balance){
-    std::cout<<"\nYour remaining balance is: "<<balance<<std::endl;
+    std::cout<<"\nYour remaining balance is: "<<std::setprecision(2)<< std::fixed<< balance<<std::endl<<std::endl;
 }
