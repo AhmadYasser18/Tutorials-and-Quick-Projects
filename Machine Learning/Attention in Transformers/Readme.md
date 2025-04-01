@@ -77,3 +77,20 @@ $d_k$ : Dimension of the Key matrix
 Similarly as in Self-Attention, matrices for Q, K, and V are calculated. Then similarity between the Query and Key are is calculated which is then scaled.
 However, before proeceding to applying the Softmax function, matrix **M** is added. The purpose of the **Mask** matrix is to prevent tokens from including anything coming after them when calculating attention. The Mask matrix consists of **0** for values to be included [0 + value = value];  
 and **-∞** for values to be masked [-inf + value = -inf] which will retrun 0 when the function is applied.
+
+# Encoder-Decoder Attenion
+
+The first Transformer had an **Encoder** which used a Self-Attention and **Decoder** whch used Masked Self-Attentions. The encoder and the decoder were connected to each other so they could calculate **Encoder-Decoder Attention** [also called **Cross-Attention**], which uses the output from the **Encoder** to calculate the Keys and Values while the Queries are calculated from the output of the **Decoder**'s Masked Self-Attention.  
+Usind the Keys, Values, and Queries, the **Encoder-Decoder Attention** is calculated using every similarity just like in Self-Attention.  
+This transformer was based on something called a **Seq2Seq** or **Encoder-Decoder** model. **Seq2Seq** models were designed to translate text in one language into another.  
+While Seq2Seq models are as widely used for language modeling, it is still used for **Multi-Modal Models**.  An example for a **Multi-Modal Model**, it may have an Encoder trained on images or sound, and the *Context Aware Embeddings* could be fed into a text based Decoder via Encoder-Decoder Attention in order to generate captions or reponds to audio prompts.
+
+# Multi-Head Attention
+
+In order to correctly establish how words are related in longer, more complicated sentences and paragraphs, Attention is applied to Encoded Values multiple times simultaneously. Each Attention unit is called a **Head** and has its own sets of **Weights** for calculating Queries, Keys, and Values. When having multiple **Heads** calculating Attention it is refered to as **Multi-Head Attention**.
+
+![alt text](image-2.png)
+In order to get back to the original number of Encoded values [new number is: **number of Heads** X **Attention values per Head**], the Attention values are connected to a fully connected layer having same number of outputs as original number of Encoded values. 
+
+
+Another method to reduce the number of outputs is to modify the shape of the Value Weight matrix and choose a matching number of Heads.
