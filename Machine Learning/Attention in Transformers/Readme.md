@@ -1,6 +1,17 @@
-Contains notes from [Attention in Transformers - OpenAI](https://learn.deeplearning.ai/courses/attention-in-transformers-concepts-and-code-in-pytorch/)
+Contains notes from [Attention in Transformers - DeepLearning.AI](https://learn.deeplearning.ai/courses/attention-in-transformers-concepts-and-code-in-pytorch/)
 -----------
-# Transfromers 
+## Topics:
+
+1. [Transformers](#Transformer)
+2. [The Matrix Math for Self-Attention](#SelfAtt)
+3. [Self-Attention vs Masked Self-Attention](#SelfAtt_MSelfAtt)
+4. [The Matrix Math for Masked Self-Attention](#MSelfAtt)
+6. [Encoder-Decoder Attenion](#EnDecAtt)
+5. [Multi-Head Attention](#MultiHead)
+
+-----------
+# Transfromers
+<a id="Transformer"></a> 
 A transformer requires 3 main parts:
 1. **Word embedding:** 
     - converts words, bits of words and symbols (called *Tokens*) into numbers.
@@ -15,6 +26,7 @@ A transformer requires 3 main parts:
 
 
 # The Matrix Math for Self-Attention
+<a id="SelfAtt"></a>
 $$
 \text{Attention}(Q, K, V) = \text{SoftMax} \left( \frac{QK^T}{\sqrt{d_k}} \right) V
 $$
@@ -31,6 +43,7 @@ In order to create the queries for each word, the encodings are stacked in a mat
 The same is repeated but with a Keys weights and Value weights to create the Keys and Values.
 
 # Self-Attention vs Masked Self-Attention
+<a id="SelfAtt_MSelfAtt"></a> 
 
 ### Transforming words into numbers with **Word Embedding**  
 An easy way is to just assign each word to a random number. In theory this works well, however, it overlooks words having similar meanings or used similarly as they will be given different numbers.  
@@ -65,6 +78,7 @@ ChatGPT is an example of a Decoder-Only Transformer. It was trained to generate 
 To sum it up, in contrast to an **Encoder-Only Transformer** which creates ***Context Aware Embeddings***, a **Decoder-Only Transformer** creates ***Generative Inputs*** that can be plugged into a simple Neural Network generating new tokens. 
 
 # The Matrix Math for Masked Self-Attention
+<a id="MSelfAtt"></a> 
 $$
 \text{MaskedAttention}(Q, K, V, M) = \text{SoftMax} \left( \frac{QK^T}{\sqrt{d_k}} + M \right) V
 $$
@@ -79,6 +93,7 @@ However, before proeceding to applying the Softmax function, matrix **M** is add
 and **-∞** for values to be masked [-inf + value = -inf] which will retrun 0 when the function is applied.
 
 # Encoder-Decoder Attenion
+<a id="EnDecAtt"></a> 
 
 The first Transformer had an **Encoder** which used a Self-Attention and **Decoder** whch used Masked Self-Attentions. The encoder and the decoder were connected to each other so they could calculate **Encoder-Decoder Attention** [also called **Cross-Attention**], which uses the output from the **Encoder** to calculate the Keys and Values while the Queries are calculated from the output of the **Decoder**'s Masked Self-Attention.  
 Usind the Keys, Values, and Queries, the **Encoder-Decoder Attention** is calculated using every similarity just like in Self-Attention.  
@@ -86,7 +101,7 @@ This transformer was based on something called a **Seq2Seq** or **Encoder-Decode
 While Seq2Seq models are as widely used for language modeling, it is still used for **Multi-Modal Models**.  An example for a **Multi-Modal Model**, it may have an Encoder trained on images or sound, and the *Context Aware Embeddings* could be fed into a text based Decoder via Encoder-Decoder Attention in order to generate captions or reponds to audio prompts.
 
 # Multi-Head Attention
-
+<a id="MultiHead"></a>
 In order to correctly establish how words are related in longer, more complicated sentences and paragraphs, Attention is applied to Encoded Values multiple times simultaneously. Each Attention unit is called a **Head** and has its own sets of **Weights** for calculating Queries, Keys, and Values. When having multiple **Heads** calculating Attention it is refered to as **Multi-Head Attention**.
 
 ![alt text](image-2.png)
