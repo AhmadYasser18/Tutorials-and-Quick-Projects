@@ -3,8 +3,8 @@ Contains notes from [How Transformer LLMs work - DeepLearning.AI](https://learn.
 ## Topics:
 
 1. [Introduction](#intro)
-2. [Understanding Language Models: Language as a Bag=of-Words](#bagOFwords)
-3. 
+2. [Understanding Language Models: Language as a Bag-of-Words](#bagOFwords)
+3. [Understanding Language Models: Word Embeddings](#embeddings)
 
 -----------
 # Introduction
@@ -36,4 +36,12 @@ The **Decoder:**
 
 - **Encoder-Decoder models:** attempt to get the best of both. 
 
-**Tokenization** is the process of converting input text into pieces (tokens). A taken may even be smaller than a word.
+**Tokenization** is the process of converting input text into pieces (tokens). A taken may even be smaller than a word.  
+Tokenization of different sentences results in sets of tokens used to build a **Vocabulary**. The Vocabulary will contain fewer words than generated tokens as it has only unique words. Number of tokens in a Vocabulary is referred to as a Vocabulary Size. A numerical representation of how often token of an input appear in the vocabulary is called a Bag-of-Words.
+
+# Understanding Language Models: Word Embeddings
+<a id="embeddings"></a>
+
+Although Bag-of-words is a useful approach, it is flawed in how it considers language to be nothing more than a literal bag of words; meaning it does not consider the semantic nature of text.  
+
+Following it was the release of **Word2Vec** which was one of the first successful attempts at capturing the meaning of text in embeddings. This was done by training it on large amounts of textual data and leveraging neural networks making it learn the semantic representation of words.  
