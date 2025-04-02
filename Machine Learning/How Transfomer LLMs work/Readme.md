@@ -5,6 +5,7 @@ Contains notes from [How Transformer LLMs work - DeepLearning.AI](https://learn.
 1. [Introduction](#intro)
 2. [Understanding Language Models: Language as a Bag-of-Words](#bagOFwords)
 3. [Understanding Language Models: Word Embeddings](#embeddings)
+4. [Understanding Language Models: Encoding and Decoding Context with Attention](#EncodeDecode)
 
 -----------
 # Introduction
@@ -49,3 +50,8 @@ Using neural networks **Word2Vec** generates word embeddings by looking at which
 - In the beginning each word is assigned a vector embedding (initialized with random values). 
 - In every training step, words pairs are taken from training data and the model attempts to predict whether they are likely to be neighbors in a sentence.
 - During the training process, **Word2Vec** learns the relationship between words and distills that information into the embedding.  
+
+Note that there are many types of embeddings that can be used. Models similar to **Word2Vec** which aim to convert textual input to embeddings are referred to as **Representation Models** as they attempt to represent text as values.
+
+# Understanding Language Models: Encoding and Decoding Context with Attention
+<a id="EncodeDecode"></a>
