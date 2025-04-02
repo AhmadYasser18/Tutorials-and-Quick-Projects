@@ -45,3 +45,7 @@ Tokenization of different sentences results in sets of tokens used to build a **
 Although Bag-of-words is a useful approach, it is flawed in how it considers language to be nothing more than a literal bag of words; meaning it does not consider the semantic nature of text.  
 
 Following it was the release of **Word2Vec** which was one of the first successful attempts at capturing the meaning of text in embeddings. This was done by training it on large amounts of textual data and leveraging neural networks making it learn the semantic representation of words.  
+Using neural networks **Word2Vec** generates word embeddings by looking at which words tend to appear next to each other. 
+- In the beginning each word is assigned a vector embedding (initialized with random values). 
+- In every training step, words pairs are taken from training data and the model attempts to predict whether they are likely to be neighbors in a sentence.
+- During the training process, **Word2Vec** learns the relationship between words and distills that information into the embedding.  
