@@ -55,3 +55,7 @@ Note that there are many types of embeddings that can be used. Models similar to
 
 # Understanding Language Models: Encoding and Decoding Context with Attention
 <a id="EncodeDecode"></a>
+
+Capturing text context is important to perform some language tasks, such as translation. 
+**Word2Vec** creates static embeddings meaning that the same embedding is generated for a given word regardless of context.  
+- **RNN**s were used due to their ability to model entire sequences.

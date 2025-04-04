@@ -57,3 +57,5 @@ Using:
 - Declaring Functions
 - Overloaded Functions
 - Global/Local variables
+
+## 10. Arrays
