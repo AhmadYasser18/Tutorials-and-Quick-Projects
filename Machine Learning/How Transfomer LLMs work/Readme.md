@@ -58,4 +58,8 @@ Note that there are many types of embeddings that can be used. Models similar to
 
 Capturing text context is important to perform some language tasks, such as translation. 
 **Word2Vec** creates static embeddings meaning that the same embedding is generated for a given word regardless of context.  
-- **RNN**s were used due to their ability to model entire sequences.
+**RNN**s were used due to their ability to model entire sequences. RNN in the encoding step takes the static embeddings generated using Word2Vec and processes it, taking into account the context of the embeddings, generating the context in the form of embedding.  
+The decoder step aimed to generate language (response) by leveraging the previously generated context embeddings. Output tokens are generated one at a time, which is called **autoregressive**.  
+This method makes it harder to deal with longer sentences as the embedding used to represent the text may fail to  capture the entire context as it gets longer and more complex. 
+
+**Attention** was later introduced
