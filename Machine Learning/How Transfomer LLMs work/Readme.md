@@ -105,3 +105,6 @@ Unlike BERT models, generative models tend to only stack decoders. Generative Pr
 # Tokenizers
 <a id="tokenizers"></a>
 
+Given an input sentence, it's tokenized into smaller pieces. Tokens can be entire words or pieces of a word. When these pieces are combinded they form the original word. This porcess is necessary since tokenizers have a limited number of tokens. Thus, whenever an unkown word is encountered, it can be still represented using those sub tokens.  
+Each token has a fixed ID to easily encode and decode the tokens.  
+These are fed to the language model which internally creates the token embeddings. The output of a generative model would be another token ID which is decoded to represent an actual token.
