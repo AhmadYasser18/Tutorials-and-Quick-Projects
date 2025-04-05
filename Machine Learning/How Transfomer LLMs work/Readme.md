@@ -6,6 +6,7 @@ Contains notes from [How Transformer LLMs work - DeepLearning.AI](https://learn.
 2. [Understanding Language Models: Language as a Bag-of-Words](#bagOFwords)
 3. [Understanding Language Models: Word Embeddings](#embeddings)
 4. [Understanding Language Models: Encoding and Decoding Context with Attention](#EncodeDecode)
+5. [Understanding Language Models: Transformers](#transformers)
 
 -----------
 # Introduction
@@ -62,4 +63,27 @@ Capturing text context is important to perform some language tasks, such as tran
 The decoder step aimed to generate language (response) by leveraging the previously generated context embeddings. Output tokens are generated one at a time, which is called **autoregressive**.  
 This method makes it harder to deal with longer sentences as the embedding used to represent the text may fail to  capture the entire context as it gets longer and more complex. 
 
-**Attention** was later introduced
+**Attention** was later introduced which allows a model to focus on parts of the input sequence that are relevant to each other and amplify their signal. 
+
+# Understanding Language Models: Transformers
+<a id="transformers"></a>
+
+**Transformers** architecture is based solely on **Attention** without the **RNN**. This architecture allows the model to be trained in parallel which speeds up calculations significantly.
+
+The transformer consists with stacked encoder and decoder blocks. By stacking the blocks, the encoder and decoder strength is amplified.   
+- Encoder: 
+    - input is converted to embeddings starting with *random values* instead of *Word2Vec*.
+    - Self-Attention processes these embeddings and updates them.
+    - The updated embeddings contain more contextualized information as a result of the intention mechanism.
+    - The embeddings are then passed to a feedforward neural network which finally output **contextualized token word embedding**.
+After the encoder is done processing, 
+- Decoder:
+    - takes any previously generated words and pass it to the masked Self-Attention.
+    - intermediate embeddings are generated and passed to another Attention network together with Encoder's embeddings, processing both what was just generated and what was already in possession.
+    - This output is passed to a neural network generating the next word in sequence.
+
+![alt text](image-1.png)
+
+The original architecture (encoder-decoder) serves well in translation tasks but can not be used easily for other tasks like tet classification 
+
+A new a architecture called **Bidirectional Encoder Representations from Transformers (BERT)** was introduced which could be used for a wide variety of tasks. BERT is an encoder only architecture that focuses on representing language and generating contextual word embeddings.
