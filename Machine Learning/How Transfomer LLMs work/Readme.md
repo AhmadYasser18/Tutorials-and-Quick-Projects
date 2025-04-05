@@ -7,6 +7,7 @@ Contains notes from [How Transformer LLMs work - DeepLearning.AI](https://learn.
 3. [Understanding Language Models: Word Embeddings](#embeddings)
 4. [Understanding Language Models: Encoding and Decoding Context with Attention](#EncodeDecode)
 5. [Understanding Language Models: Transformers](#transformers)
+6. [Tokenizers](#tokenizers)
 
 -----------
 # Introduction
@@ -86,4 +87,21 @@ After the encoder is done processing,
 
 The original architecture (encoder-decoder) serves well in translation tasks but can not be used easily for other tasks like tet classification 
 
-A new a architecture called **Bidirectional Encoder Representations from Transformers (BERT)** was introduced which could be used for a wide variety of tasks. BERT is an encoder only architecture that focuses on representing language and generating contextual word embeddings.
+## Representation models - BERT
+
+A new a architecture called **Bidirectional Encoder Representations from Transformers (BERT)** was introduced which could be used for a wide variety of tasks. BERT is an encoder only architecture that focuses on representing language and generating contextual word embeddings.  
+The input includes an additional token, the CLS. The CLS, or classification token, is used as a representation for the entire input. It is often used a the input embedding for fine tuning the model on specific tasks.  
+
+![alt text](image-2.png)
+
+To train a BERT-like model *mask language modeling technique* could be used.  
+This is done by randomly masking a number of words from the input sequence then having the model predict the masked words. By doing so, the model learns to represent language as it attempts to deconstruct the masked words. This step is called pre-training.  
+The pre-trained model is then fine-tuned on a number of downstream tasks [classification, named entity recognition, paraphrase identification...].
+
+## Generative Models
+
+Unlike BERT models, generative models tend to only stack decoders. Generative Pre-trained Transformer (**GPT**) is one of its famous implementations. 
+
+# Tokenizers
+<a id="tokenizers"></a>
+
