@@ -1,4 +1,12 @@
-# Data Structure
+**Content:**
+- [Data Structures](#DS)
+- [Algorithms](#algos)
+- [Recursion](#recursion)
+- [Hash Tables/Maps](#hash)
+
+
+# Data Structures
+<a id="DS"></a> 
 are data organization, management and storage format that enables efficient access and modification [Access, Insertion, Deletion, Search].
 
 ## Types:
@@ -19,6 +27,7 @@ are data organization, management and storage format that enables efficient acce
     - Graphs
 
 # Algorithms
+<a id="algos"></a> 
 While comparing/analyzing algorithms there are certain factors that determine how good an algorithm is.
 
 **Efficiency:** could be represented by many metrics, including:
@@ -78,3 +87,27 @@ while i < n:
                                    1 + n * log n
 ```
 Complexity: O(n log n)
+
+
+________
+
+# Recusrion
+<a id="recursion"></a> 
+- can be a substitute for iteration
+- divide a problem into sub-problems of the same type as the original
+- easier to read/write/debug
+- sometimes slower
+- takes more memory
+
+
+
+# Hash Tables/Maps
+<a id="hash"></a> 
+referred to as a dictionary in *Python* stored info **values** and pairs them with **keys**.
+- used improves readability for big systems
+- allow for search in O(1)s
+_ _ _ _ _ _ _ _ _ 
+- a hash table is created from an array through the use of a **hash function**
+- a hash function takes in custom data which is to be assigned to a key, and maps it to an index in the array.
+- a **collosion** occurs when more than one value is assigned the same index by the hash function
+- when a collision occurs, values could be grouped in a linked list (kist in python)
