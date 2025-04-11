@@ -5,6 +5,8 @@
 - [Hash Tables/Maps](#hash)
 
 
+**Note:** the majority of data structures and algorithms are each implemented and explained in their own notebook, however, some like recursion or hash table were explained briefly in the ReadMe.md 
+
 # Data Structures
 <a id="DS"></a> 
 are data organization, management and storage format that enables efficient access and modification [Access, Insertion, Deletion, Search].
@@ -110,4 +112,4 @@ _ _ _ _ _ _ _ _ _
 - a hash table is created from an array through the use of a **hash function**
 - a hash function takes in custom data which is to be assigned to a key, and maps it to an index in the array.
 - a **collosion** occurs when more than one value is assigned the same index by the hash function
-- when a collision occurs, values could be grouped in a linked list (kist in python)
+- when a collision occurs, values could be grouped in a linked list (list in python)
