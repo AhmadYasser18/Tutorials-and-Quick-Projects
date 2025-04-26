@@ -161,7 +161,7 @@ It identifies information required by the business by displaying the relevant en
 **Entity:** any independent existence in the system which may be described using a set of characteristics or attributes.
 
 **Guidelines for designing Entity Relationship Modeling:**
--  Entities to be described in the model
+- Entities to be described in the model
 - Characteristics/attributes of those entities
 - Can an attribute or a set of attributes be used to uniquely identify an etity
 - Relationships between entities
@@ -169,7 +169,12 @@ It identifies information required by the business by displaying the relevant en
 ## Entities and Attributes
 <a id="entities&att"></a>
 
-
+Representation:
+- **Entities**  -> rectangle
+- **Single/Simple Attribute** [attributes having only one value for a particular instance.] -> oval
+- **Multi-valued Attribute** [attributes having a set of values for the same particular instance] -> double line oval
+- **Composite Attribute** [attributes that can be divided to subparts.] -> connected ovals
+- **Derived Attribute** [attributes that can calculated/made from existing attributes.] -> dotted oval
 
 
 ------------------------
