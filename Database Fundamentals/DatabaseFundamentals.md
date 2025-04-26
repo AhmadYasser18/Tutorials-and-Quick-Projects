@@ -16,6 +16,9 @@ Content:
     - [Entities and Attributes](#entities&att)
     - [Relationship](#Relationship)
 
+- [ERD Mapping to Tables](#ERD_Mapping) 
+    - [Mapping strong and weak entities](#Strong_Weak_Entities)
+
 # Introduction
 <a id="intro"></a>
 
@@ -205,10 +208,19 @@ It identifies information required by the business by displaying the relevant en
     - for the same side the cardinality must be the same. If not, then the design is to be changed to a closed loop.
 
 ### Participation
+- specifies the minimum number of relationships instances that each entity can participate with.
+- *double lines* for **must** and *single line* for **may**
 
 
+Note that an attribute may be added to a relationship. 
 
 ------------------------
 ------------------------
 # ERD Mapping to Tables
-<a id="ERD"></a> 
+<a id="ERD_Mapping"></a>
+
+## Mapping strong and weak entities
+<a id="Strong_Weak_Entities"></a>
+
+### Converting from Conceptual to logical design
+**Primary Keys:** must contain a unique value for each row of data **AND** CANNOT contain null values.
