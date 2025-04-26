@@ -14,6 +14,7 @@ Content:
 - [Entity Relationship Diagram](#ERD) 
     - [Entity Relationship Modeling](#erm)
     - [Entities and Attributes](#entities&att)
+    - [Relationship](#Relationship)
 
 # Introduction
 <a id="intro"></a>
@@ -169,12 +170,42 @@ It identifies information required by the business by displaying the relevant en
 ## Entities and Attributes
 <a id="entities&att"></a>
 
-Representation:
+
 - **Entities**  -> rectangle
+### Types of Attributes:
 - **Single/Simple Attribute** [attributes having only one value for a particular instance.] -> oval
 - **Multi-valued Attribute** [attributes having a set of values for the same particular instance] -> double line oval
 - **Composite Attribute** [attributes that can be divided to subparts.] -> connected ovals
 - **Derived Attribute** [attributes that can calculated/made from existing attributes.] -> dotted oval
+
+
+**Weak Etities:** an entity that doesn't have a key attribute *and* is fully dependent on another entity. A double-lined rectangle is used to represent it.
+
+## Relationship
+<a id="Relationship"></a>
+
+**Relationships**: a relationship is a connection between entity classes. For a relationship, three main parameters must be known:
+- Degree
+- Cardinality ratio
+- Participation
+
+### Degree
+- refers to the number of entites existing within the relationship.
+- represented by a diamond shape
+- **Types**:
+    - Binary: only two entities in the relationship
+    - Unary/recursive: between the entity and itself.
+    - Ternary: involving three entities.
+ 
+### Cardinality ratio
+- specifies the maximum number of relationships
+- one to one, many to one, one to many, many to many
+- for a ternary relationship
+    - 3 binary relationships are assumed and a cardinality is given to each.
+    - for the same side the cardinality must be the same. If not, then the design is to be changed to a closed loop.
+
+### Participation
+
 
 
 ------------------------
