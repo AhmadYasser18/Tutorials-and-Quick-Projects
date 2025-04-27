@@ -113,3 +113,7 @@ These are fed to the language model which internally creates the token embedding
 # Architectural Overview
 <a id="arch_over"></a>
 
+The transformer is made up of three major components:
+    - **Tokenizer**: breaks down text into multiple chunks 
+    - **Stack of Transformer Blocks**: contains majority of computing, neural networks ...
+    - **Language Modeling Head**: 

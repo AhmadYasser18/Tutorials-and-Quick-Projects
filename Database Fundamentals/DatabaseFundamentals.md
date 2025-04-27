@@ -223,4 +223,8 @@ Note that an attribute may be added to a relationship.
 <a id="Strong_Weak_Entities"></a>
 
 ### Converting from Conceptual to logical design
+1. Each entity is turned into a table
+    - The attributes of an entity represent its columns
+2. 
+
 **Primary Keys:** must contain a unique value for each row of data **AND** CANNOT contain null values.
