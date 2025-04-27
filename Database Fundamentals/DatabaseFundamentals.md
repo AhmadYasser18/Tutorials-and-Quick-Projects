@@ -225,6 +225,8 @@ Note that an attribute may be added to a relationship.
 ### Converting from Conceptual to logical design
 1. Each entity is turned into a table
     - The attributes of an entity represent its columns
+    - A primary key is set for the table. **Primary Keys:** must contain a unique value for each row of data **AND** CANNOT contain null values. If multiple attrubutes satisfy these conditions, the one with least storage is used.
+    - For multi-valued attributes, a separate table is made and the primary key is used in that table as a foreign key.
+    - Derived attributes aren't stored as they increase the storage taken. The only is exception is when that attribute is used frequently to retrieve the data. 
 2. 
 
-**Primary Keys:** must contain a unique value for each row of data **AND** CANNOT contain null values.
