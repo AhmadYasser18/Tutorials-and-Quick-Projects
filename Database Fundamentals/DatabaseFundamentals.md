@@ -20,6 +20,9 @@ Content:
     - [Mapping strong and weak entities](#Strong_Weak_Entities)
     - [Mapping of Relationship Types](#relationship_mapping)
 
+- [Structured Query Language](#SQL) 
+    - [Database Schema & Constraints](#DB Schema & Constraints)
+
 # Introduction
 <a id="intro"></a>
 
@@ -231,10 +234,27 @@ Note that an attribute may be added to a relationship.
     - Derived attributes aren't stored as they increase the storage taken. The only is exception is when that attribute is used frequently to retrieve the data. 
 2. Mapping weak entities
     - primary key of owner entity is added as foreign key.
-    - combination of the foreing key with another attribute offer a unique identification for the table.
+    - combination of the foreign key with another attribute offer a unique identification for the table.
  
 ## Mapping of Relationship Types
 <a id="relationship_mapping"></a>
 
-3. Mapping of Relationship Types
-    - One-to-many [binary/uniary]: 
+3. **One-to-many [binary/uniary]**: The primary key of the *one* entity is added as a foreign key in the *many*.
+    - if the the relationship is unary then the name may differ in order to avoid confusion.
+    - for weak entities where a combination of the foreign key with another attribute was used, no need to add a key as it's already there. 
+4. **Many-to-many**: a new table is made having foreign keys from the main tables. Those keys form a unique combination.
+5. **One-to-one**: 
+    - May-May: The primary key of either could be add as foreign in the other or both could be added into a new table.
+    - Must-Must: The two table are merged and either primary key could be chosen as the new primary key.
+    - May-Must: The primary key of the *may* entity is added as a foreign key in the *must*.
+6. **Mapping of ternary relationships**: a new table containing primary keys of entities is made. 
+
+------------------------
+------------------------
+
+# Structured Query Language
+<a id="SQL"></a>
+
+## Database Schema & Constraints
+<a id="DB Schema & Constraints"></a>
+
