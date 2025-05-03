@@ -18,6 +18,7 @@ Content:
 
 - [ERD Mapping to Tables](#ERD_Mapping) 
     - [Mapping strong and weak entities](#Strong_Weak_Entities)
+    - [Mapping of Relationship Types](#relationship_mapping)
 
 # Introduction
 <a id="intro"></a>
@@ -223,10 +224,17 @@ Note that an attribute may be added to a relationship.
 <a id="Strong_Weak_Entities"></a>
 
 ### Converting from Conceptual to logical design
-1. Each entity is turned into a table
+1. Mapping regular entities
     - The attributes of an entity represent its columns
     - A primary key is set for the table. **Primary Keys:** must contain a unique value for each row of data **AND** CANNOT contain null values. If multiple attrubutes satisfy these conditions, the one with least storage is used.
     - For multi-valued attributes, a separate table is made and the primary key is used in that table as a foreign key.
     - Derived attributes aren't stored as they increase the storage taken. The only is exception is when that attribute is used frequently to retrieve the data. 
-2. 
+2. Mapping weak entities
+    - primary key of owner entity is added as foreign key.
+    - combination of the foreing key with another attribute offer a unique identification for the table.
+ 
+## Mapping of Relationship Types
+<a id="relationship_mapping"></a>
 
+3. Mapping of Relationship Types
+    - One-to-many [binary/uniary]: 
