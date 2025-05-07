@@ -9,6 +9,7 @@ Contains notes from [How Transformer LLMs work - DeepLearning.AI](https://learn.
 5. [Understanding Language Models: Transformers](#transformers)
 6. [Tokenizers](#tokenizers)
 7. [Architectural Overview](#arch_over)
+8. [Transformer Block](#transformer_block)
 
 -----------
 # Introduction
@@ -113,7 +114,12 @@ These are fed to the language model which internally creates the token embedding
 # Architectural Overview
 <a id="arch_over"></a>
 
-The transformer is made up of three major components:
-    - **Tokenizer**: breaks down text into multiple chunks 
-    - **Stack of Transformer Blocks**: contains majority of computing, neural networks ...
-    - **Language Modeling Head**: 
+The transformer is made up of three major components:  
+    - **Tokenizer**: breaks down text into multiple chunks. Token embeddings are associated for each token.
+    - **Stack of Transformer Blocks**: contains majority of computing, neural networks..   
+    - **Language Modeling Head**: based on all of the processing in the stack of transformer blocks results  in a token probability scoring indicating percentage of each token.  
+    One method of choosing the output token depends on the highest probability [Greedy decoding]. Other strategies use different methods in choosing the output token.
+
+# Transformer Block
+<a id="transformer_block"></a>
+
