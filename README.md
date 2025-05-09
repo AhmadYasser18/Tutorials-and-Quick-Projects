@@ -5,7 +5,11 @@ Content:
 
 ## - [C++](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/C%2B%2B_tut)
 ## - [Data Structure and Algorithms](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Data%20Structure%20and%20Algorithms)
-## - [HAckerRank](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/HackerRank)
-## - [MAchine Learning](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning)
+## - [Database Fundamentals]()
+## - [Deep-ML_problems]():
+    contains solutions to problems from Deep-ML 
+## - [HackerRank](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/HackerRank)
+    contains solution to problems from HackerRank
+## - [Machine Learning](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning)
 ## - [Projects](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Projects)
 ## - [Pygame](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Pygame)
