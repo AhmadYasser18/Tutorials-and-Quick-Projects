@@ -130,4 +130,6 @@ The transformer block itself is made up of two major components:
 - The Feed Forward Neural Network Layer
 
 The Feed Forward neural network layer is for a high level intuition of the feed-forward neural network.  
-Self-Attention allows the model to attend to previous tokens and incorporate the context in its understanding of the token it's currently looking at.
+Self-Attention allows the model to attend to previous tokens and incorporate the context in its understanding of the token it's currently looking at. Seld-Attention does two main things:
+- relevance scoring: assigns a score to how relevant each of the input tokens are to the token being processed. 
+- Combining information: after it assigns scores, it combines relevant information into the representation.
