@@ -123,3 +123,11 @@ The transformer is made up of three major components:
 # Transformer Block
 <a id="transformer_block"></a>
 
+After the tokenizer breaks down the prompt into tokens, the token embeddings flow to the first transformer block generating a vector the same size as the output. This vector is passed across numerous blocks genreating the output to be passed to the LM Head.
+
+The transformer block itself is made up of two major components:
+- The Self-Attention Layer
+- The Feed Forward Neural Network Layer
+
+The Feed Forward neural network layer is for a high level intuition of the feed-forward neural network.  
+S
