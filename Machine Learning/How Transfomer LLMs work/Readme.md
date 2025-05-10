@@ -10,6 +10,7 @@ Contains notes from [How Transformer LLMs work - DeepLearning.AI](https://learn.
 6. [Tokenizers](#tokenizers)
 7. [Architectural Overview](#arch_over)
 8. [Transformer Block](#transformer_block)
+9. [Self-Attention](#selfattention)
 
 -----------
 # Introduction
@@ -133,3 +134,13 @@ The Feed Forward neural network layer is for a high level intuition of the feed-
 Self-Attention allows the model to attend to previous tokens and incorporate the context in its understanding of the token it's currently looking at. Seld-Attention does two main things:
 - relevance scoring: assigns a score to how relevant each of the input tokens are to the token being processed. 
 - Combining information: after it assigns scores, it combines relevant information into the representation.
+
+# Self-Attention
+<a id="selfattention"></a>
+
+Self-Attention happens in the attention head.  
+Self-Attention is conducted using three matrices: 
+1. Query Projection Matrix used to calculate the Query Matrix 
+2. Key Projection Matrix used to calculate the Key Matrix
+3. Value Projection Matrix used to calculate the Value Matrix
+
