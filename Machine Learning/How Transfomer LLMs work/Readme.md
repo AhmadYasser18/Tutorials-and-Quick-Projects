@@ -145,3 +145,6 @@ Self-Attention is conducted using three matrices:
 3. Value Projection Matrix used to calculate the Value Matrix
 
 After relevant scores are obtained, this information is combined using the values vector associated with each token resulting in weighted values.
+
+Calculation happens within an attention head. Self-Attention happens, in parallel, in multiple attention heads. Each attention head have its own set of keys, queries and values and weight matrices. Thus the values assigned to the various vectors is different.
+[3:00]
