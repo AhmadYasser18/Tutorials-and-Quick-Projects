@@ -144,3 +144,4 @@ Self-Attention is conducted using three matrices:
 2. Key Projection Matrix used to calculate the Key Matrix
 3. Value Projection Matrix used to calculate the Value Matrix
 
+After relevant scores are obtained, this information is combined using the values vector associated with each token resulting in weighted values.
