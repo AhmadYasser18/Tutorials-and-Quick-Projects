@@ -22,6 +22,7 @@ Content:
 
 - [Structured Query Language](#SQL) 
     - [Database Schema & Constraints](#DB Schema & Constraints)
+    - [SQL - Data Definition Language](#DDL)
 
 # Introduction
 <a id="intro"></a>
@@ -257,4 +258,23 @@ Note that an attribute may be added to a relationship.
 
 ## Database Schema & Constraints
 <a id="DB Schema & Constraints"></a>
+
+Structured Query Language (SQL) is the language used to interact with the database.  
+It is divided into 3 main categories:
+- DDL [Data Definition Language]
+- DML [Data Manipulation Language]
+- DCL [Data Control Language]
+
+**Database Schema:** a schema is group of related objects in a database. There is one owner of the schema who has access to manipulate the structure of any object in the schema. 
+
+**Database Constraints:** restrictions on the database which help in maintaining the data integrity. 
+- **Primary Key**
+- **Not Null**
+- **Unique Key**
+- **Referential Integrity [FK]:** Takes into consideration dealing with foreign key (Parent/Child records) and (inserting/deleting)
+- **Check:** customized to suit the column
+
+## SQL - Data Definition Language
+<a id="DDL"></a>
+
 
