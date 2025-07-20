@@ -21,8 +21,14 @@ Content:
     - [Mapping of Relationship Types](#relationship_mapping)
 
 - [Structured Query Language](#SQL) 
-    - [Database Schema & Constraints](#DB Schema & Constraints)
+    - [Database Schema & Constraints](#Schema&Constraints)
     - [SQL - Data Definition Language](#DDL)
+    - [SQL - Data Control Language](#DCL)
+
+-[Data Manipulation Language](#DML)
+    - [Insert Command](#insert)
+    - [Update Command](#update)
+
 
 # Introduction
 <a id="intro"></a>
@@ -257,7 +263,7 @@ Note that an attribute may be added to a relationship.
 <a id="SQL"></a>
 
 ## Database Schema & Constraints
-<a id="DB Schema & Constraints"></a>
+<a id="Schema&Constraints"></a>
 
 Structured Query Language (SQL) is the language used to interact with the database.  
 It is divided into 3 main categories:
@@ -277,4 +283,55 @@ It is divided into 3 main categories:
 ## SQL - Data Definition Language
 <a id="DDL"></a>
 
+Responsible for the structure of the database objects.
+Used for creating/editing/deleting not for data manipulation.  
 
+**Commands:**
+- CREATE
+    - CREATE TABLE TABLENAME (ColumnName DataType Constraint, Column2Name DataType Constraint)
+    - **Ex:** CREATE TABLE Students (StudentID NUMBER PRIMARY KEY, FirstName CHAR(50) NOT NULL, LastName CHAR(50) BirthDate DATE)
+- ALTER
+    - ALTER TABLE TABLENAME ADD NewColumn DataType
+    - ALTER TABLE TABLENAME DROP COLUMN ColumnName
+- DROP
+    - *removes Whole table*
+    - DROP TABLE TableName
+- TRUNCATE
+
+## SQL - Data Control Language
+<a id="DCL"></a>
+
+Commands that gives access privilege to data. Privileges can be:
+- System privilege
+- **Object privilege**: includes persmission given to the user for the database objects.  
+
+**Commands:**
+- GRANT
+    - GRANT COMMAND ON TABLE TableName TO UserName
+    - **EX:**
+        - GRANT SELECT ON TABLE Table1 TO UserA *userA is only allowed to select(view) the data*
+        - GRANT ALL ON TABLE Table1 TO UserB, UserC *users B and C are allowed all DMLs*
+        - GRANT SELECT ON TABLE Table1 TO UserA WITH GRANT OPTIONS *userA can view the data in addition to granting the permission to others*
+- REVOKE
+    - REVOKE COMMAND ON TABLE TableName FROM UserName
+
+
+# Data Manipulation Language
+<a id="DML"></a>
+
+## Insert Command
+<a id="insert"></a>
+
+- INSERT INTO TableName (Col1_name, Col2_name, Col3_name, Col4_name) VALUES ('Col1_Value_char', 'Col2_Value_char', Col3_Value_Number, 'Col4_Value_Date')  
+  
+**OR** if columns order is known  
+
+- INSERT INTO TableName VALUES ('Col1_Value_char', 'Col2_Value_char', Col3_Value_Number, 'Col4_Value_Date')
+
+**OR** if not all columns have values
+  
+- INSERT INTO TableName (Col1_name, Col2_name, Col4_name) VALUES ('Col1_Value_char', 'Col2_Value_char', 'Col4_Value_Date')
+
+
+## Update Command
+<a id="update"></a>
