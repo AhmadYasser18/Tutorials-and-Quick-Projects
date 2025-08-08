@@ -415,5 +415,19 @@ Used mainly to view data
 > from Tablename    
 > WHERE Col1 In (Val1, Val2)  
 
-## "like" operators
+*IN* is a multi-row operator meaning it deals with more than one value.
+
+## "like" operator
 <a id="like"></a>
+
+The **like** operator is used to match pattern when the exacted wanted value is unkown. The unkown character is refered as **?**.
+
+> SELECT *  
+> from Tablename  
+> WHERE fname like "Ahm?d"   
+> OR fname like "?o*"
+
+This query refers to either Ahmad/Ahmed or any name having *o* as the second character. * refers to zero or more characters.
+
+## Alias
+<a id="alias"></a>
