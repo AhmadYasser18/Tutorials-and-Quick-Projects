@@ -30,6 +30,8 @@ Content:
     - [Update Command](#update)
     - [DELETE Command, Truncate](#delete)
     - [SELECT Command](#select)
+    - [Comparison & Logical operators](#operators)
+    - ["like" operators](#like)
 
 
 # Introduction
@@ -369,3 +371,49 @@ Additionally, *TRUNCATE* command can't be rolled back unlike *DELETE* [unless co
 ## SELECT Command
 <a id="select"></a>
 
+Used mainly to view data
+
+> SELECT COL1, COL2, [COL N]
+> FROM Tablename
+-------
+**Note:** If colum name is placed in square brackets if the name contains spaces.  
+
+**Coditional Selecting**  
+> SELECT Col1, Col2
+> FROM Tablename
+> WHERE Col1 = value
+
+## Comparison & Logical operators
+<a id="operators"></a>
+
+> SELECT *  
+> from Tablename  
+> WHERE Col1 > Val
+
+**More than one conditions**
+
+> SELECT *  
+> from Tablename    
+> WHERE Col1 > Upper_Val  
+> AND COL1 < Lower_Val  
+
+**And operator**
+
+> SELECT *  
+> from Tablename    
+> WHERE Col1 between Upper_Val and Lower_Val
+
+**Or operator**  
+> SELECT Colname
+> from Tablename    
+> WHERE Col1 < Upper_Val  
+> or Col2 < Lower_Val
+
+>>**If values for same column**  
+ 
+> SELECT Colname  
+> from Tablename    
+> WHERE Col1 In (Val1, Val2)  
+
+## "like" operators
+<a id="like"></a>
