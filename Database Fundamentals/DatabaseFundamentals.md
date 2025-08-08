@@ -32,6 +32,10 @@ Content:
     - [SELECT Command](#select)
     - [Comparison & Logical operators](#operators)
     - ["like" operators](#like)
+    - [Alias](#alias)
+    - [Order By](#OrderBy)
+    - [Distinct](#distinct)
+    - [Inner Join](#inner_j)
 
 
 # Introduction
@@ -431,3 +435,39 @@ This query refers to either Ahmad/Ahmed or any name having *o* as the second cha
 
 ## Alias
 <a id="alias"></a>
+
+> SELECT Col1, Col2 * 5.6 as NewCol
+> from Tablename
+
+New column named *NewCol* will be returned, along selected columns, containing the written formula's values.
+
+> Select Col1 + ' ' + Col2 as [Full Name]
+> from Tablename
+> Where Col3*12 > Value
+
+**+** is used to concatenate columns Col1 and Col2 having a space in between.   
+*Full Name* was written in square brackets as it contains space in its name.   
+
+
+
+## Order By
+<a id="OrderBy"></a>
+
+> SELECT *  
+> from Tablename  
+> order by Col1, Col2 desc
+
+*Default sorting order is ascendingly.*
+**desc** is used to sort descendingly.
+
+
+## Distinct
+<a id="distinct"></a>
+
+return unique values from specified column.
+
+> Select distinct Col1  
+> from Tablename
+
+## Inner Join
+<a id="inner_j"></a>
