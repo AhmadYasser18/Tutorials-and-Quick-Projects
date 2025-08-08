@@ -28,6 +28,8 @@ Content:
 -[Data Manipulation Language](#DML)
     - [Insert Command](#insert)
     - [Update Command](#update)
+    - [DELETE Command, Truncate](#delete)
+    - [SELECT Command](#select)
 
 
 # Introduction
@@ -335,3 +337,35 @@ Commands that gives access privilege to data. Privileges can be:
 
 ## Update Command
 <a id="update"></a>
+
+Used for editing data already in the database.
+
+- UPDATE Tablename
+- set column_to_be_updated = value
+- where column_used_as_criteria = criteria  
+
+**NOTE:** In case after *WHERE* os empty then value will be added to all records.
+
+**Updating more than one column:**
+- UPDATE Tablename 
+- set column1 = value1 , column2 = value2
+- where column_used_as_criteria = criteria
+
+## DELETE Command, Truncate
+<a id="delete"></a>
+
+Deletes operates in record level.
+
+- DELETE from Tablename
+- where column = criteria
+
+**DELETE vs TRUNCATE**  
+Similar to *DELETE*, *TRUNCATE* is used for deleteing data however it operates on the table as whole unlike *DELETE* which operates on the record level. The table's data deleted however the table itself is not.
+[*Truncate* operate like a *DELETE* without *WHERE*].  
+Additionally, *TRUNCATE* command can't be rolled back unlike *DELETE* [unless commit is used] as DDLs auto commit. 
+
+- TRUNCATE TABLE Tablename
+
+## SELECT Command
+<a id="select"></a>
+
