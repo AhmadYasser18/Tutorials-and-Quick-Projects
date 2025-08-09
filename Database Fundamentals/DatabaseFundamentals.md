@@ -38,6 +38,7 @@ Content:
     - [Inner Join](#inner_j)
     - [Outer, Full Join](#outer_j)
     - [Self Join](#self_j)
+    - [Max, Min, Count Functions](#max)
 
 
 # Introduction
@@ -511,3 +512,35 @@ There 3 types of OUTER JOIN:
 <a id="self_j"></a>
 
 To join a table with itself a recursive relationship should be found. 
+
+> SELECT a.Col1, b.Col1
+> FROM Tablename a, Tablename b
+> WHERE a.Col2 = b.Col1 
+
+## Sub Queries
+<a id="sub"></a>
+
+> SELECT *
+> FROM Tablename
+> WHERE Col1 > (SELECT COL1 FROM Tablename WHERE COL2 = Value)
+
+Other Multi-row operators: IN , ALL , ANY
+
+## Max, Min, Count Functions
+<a id="max"></a>
+
+> SELECT MAX(Col1) as ColMAx, MIN(Col2) as ColMin
+> FROM Tablename
+
+**Note:** Aggregate functions ignore null values. If Count is used it will skip null records.
+
+## Group By & Having
+<a id="group"></a>
+
+> SELECT AVG(Col1)
+> FROM Tablename
+> GROUP BY Col2
+> HAVING MAX(Col1) > Value
+
+*Having* is used when a condition is to be used with an aggregate function.
+ 
