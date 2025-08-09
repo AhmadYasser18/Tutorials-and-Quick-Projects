@@ -36,6 +36,8 @@ Content:
     - [Order By](#OrderBy)
     - [Distinct](#distinct)
     - [Inner Join](#inner_j)
+    - [Outer, Full Join](#outer_j)
+    - [Self Join](#self_j)
 
 
 # Introduction
@@ -471,3 +473,41 @@ return unique values from specified column.
 
 ## Inner Join
 <a id="inner_j"></a>
+
+Used when the query is from more than one table.  
+
+> SELECT Col1, Col2
+> FROM Table1name, Table2name
+> WHERE Condition_COl_Table1 = Condition_COl_Table2
+
+**Note:**  
+- Number of join condition is number of table -1
+- The condition is usually between the primary key and foreign key.
+- If the column names is the same for both table, then the column is preceeded by the table name: Table1name.Col1
+- Aliasing could be used in order not to write the table's name
+
+> SELECT Col1, Col2
+> FROM Table1name a, Table2name as b
+> WHERE a.Condition_COl = b.Consition_COl
+
+**Using *Inner Join***
+> SELECT Col1, Col2
+> FROM Table1name a inner join Table2name as b
+> on a.Condition_COl = b.Consition_COl
+
+## Outer, Full Join
+<a id="outer_j"></a>
+
+There 3 types of OUTER JOIN:
+- LEFT: returns full data from the left table
+- RIGHT returns full data from the right table
+- FULL: returns full data from both tables
+
+> SELECT Col1, Col2
+> FROM Table1name a left outer join Table2name as b
+> on a.Condition_COl = b.Consition_COl
+
+## Self Join
+<a id="self_j"></a>
+
+To join a table with itself a recursive relationship should be found. 
