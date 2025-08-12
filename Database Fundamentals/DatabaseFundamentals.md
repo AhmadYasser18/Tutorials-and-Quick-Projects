@@ -39,6 +39,7 @@ Content:
     - [Outer, Full Join](#outer_j)
     - [Self Join](#self_j)
     - [Max, Min, Count Functions](#max)
+    - [Group By & Having](#group)
 
 
 # Introduction
@@ -543,4 +544,4 @@ Other Multi-row operators: IN , ALL , ANY
 > HAVING MAX(Col1) > Value
 
 *Having* is used when a condition is to be used with an aggregate function.
- 
+
