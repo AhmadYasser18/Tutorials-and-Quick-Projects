@@ -470,7 +470,7 @@ New column named *NewCol* will be returned, along selected columns, containing t
 
 return unique values from specified column.
 
-> Select distinct Col1  
+> Select distinct Col1   
 > from Tablename
 
 ## Inner Join
@@ -478,8 +478,8 @@ return unique values from specified column.
 
 Used when the query is from more than one table.  
 
-> SELECT Col1, Col2
-> FROM Table1name, Table2name
+> SELECT Col1, Col2  
+> FROM Table1name, Table2name  
 > WHERE Condition_COl_Table1 = Condition_COl_Table2
 
 **Note:**  
@@ -488,13 +488,13 @@ Used when the query is from more than one table.
 - If the column names is the same for both table, then the column is preceeded by the table name: Table1name.Col1
 - Aliasing could be used in order not to write the table's name
 
-> SELECT Col1, Col2
-> FROM Table1name a, Table2name as b
+> SELECT Col1, Col2  
+> FROM Table1name a, Table2name as b  
 > WHERE a.Condition_COl = b.Consition_COl
 
 **Using *Inner Join***
-> SELECT Col1, Col2
-> FROM Table1name a inner join Table2name as b
+> SELECT Col1, Col2  
+> FROM Table1name a inner join Table2name as b  
 > on a.Condition_COl = b.Consition_COl
 
 ## Outer, Full Join
@@ -505,8 +505,8 @@ There 3 types of OUTER JOIN:
 - RIGHT returns full data from the right table
 - FULL: returns full data from both tables
 
-> SELECT Col1, Col2
-> FROM Table1name a left outer join Table2name as b
+> SELECT Col1, Col2  
+> FROM Table1name a left outer join Table2name as b  
 > on a.Condition_COl = b.Consition_COl
 
 ## Self Join
@@ -514,15 +514,15 @@ There 3 types of OUTER JOIN:
 
 To join a table with itself a recursive relationship should be found. 
 
-> SELECT a.Col1, b.Col1
-> FROM Tablename a, Tablename b
+> SELECT a.Col1, b.Col1  
+> FROM Tablename a, Tablename b  
 > WHERE a.Col2 = b.Col1 
 
 ## Sub Queries
 <a id="sub"></a>
 
-> SELECT *
-> FROM Tablename
+> SELECT *  
+> FROM Tablename  
 > WHERE Col1 > (SELECT COL1 FROM Tablename WHERE COL2 = Value)
 
 Other Multi-row operators: IN , ALL , ANY
@@ -530,7 +530,7 @@ Other Multi-row operators: IN , ALL , ANY
 ## Max, Min, Count Functions
 <a id="max"></a>
 
-> SELECT MAX(Col1) as ColMAx, MIN(Col2) as ColMin
+> SELECT MAX(Col1) as ColMAx, MIN(Col2) as ColMin  
 > FROM Tablename
 
 **Note:** Aggregate functions ignore null values. If Count is used it will skip null records.
@@ -538,9 +538,9 @@ Other Multi-row operators: IN , ALL , ANY
 ## Group By & Having
 <a id="group"></a>
 
-> SELECT AVG(Col1)
-> FROM Tablename
-> GROUP BY Col2
+> SELECT AVG(Col1)  
+> FROM Tablename  
+> GROUP BY Col2  
 > HAVING MAX(Col1) > Value
 
 *Having* is used when a condition is to be used with an aggregate function.
