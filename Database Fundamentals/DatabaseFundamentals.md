@@ -43,6 +43,11 @@ Content:
 
 - [SQL - other DB objects](#other)
     - [Views](#view)
+    - [Indexes](#indexes)
+
+- [Normalization](#normalization)
+    - [What is Normalization](#normalization_)
+    - 
 
 
 # Introduction
@@ -562,7 +567,41 @@ The table on which a view is based is called base table.
 
 The view is stored as a SELECT statement in the data directory.
 
-> CREATE VIEW viewname [Cols] /*If empty then as displayed in table */
-> AS  
+> CREATE VIEW viewname [Cols] /*If empty then as displayed in table */  
+> AS /*Subquery to be written below*/
 > SELECT Col1, Col2  
 > FROM Tablename
+
+**Note**: an extra line could be added after a **WHERE** clause in order to validate before a DML is done
+> WITH CHECK OPTION
+
+**TO edit anlreadey exiting view**  
+> CREATE OR REPLACE VIEW viewname
+
+**To delete a view**  
+> DROP VIEW viewname
+
+**Advantages of VIEW:**  
+- Restrict data access.
+- Make complex queries easy.
+- Provide data independence.
+- Present different views of the same data.
+
+**Views Types**  
+
+| **Feature** | Simple | Complex |
+| :--- | :------: | :------: |
+| **Number of Tables** | One | One or More |
+| **Contain Functions** | No | Yes |
+| **Contain Groups of Data** | No | Yes |
+| **DML operations through a View** | Yes | Not always|
+
+
+## Indexes
+<a id="indexes"></a>
+
+# Normalization
+<a id="normalization"></a>
+
+## What is Normalization
+<a id="normalization_"></a>
