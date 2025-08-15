@@ -23,9 +23,9 @@ Content:
 - [Structured Query Language](#SQL) 
     - [Database Schema & Constraints](#Schema&Constraints)
     - [SQL - Data Definition Language](#DDL)
-    - [SQL - Data Control Language](#DCL)
+    - [SQL - Data Control Language](#DCL)  
 
--[Data Manipulation Language](#DML)
+- [Data Manipulation Language](#DML) 
     - [Insert Command](#insert)
     - [Update Command](#update)
     - [DELETE Command, Truncate](#delete)
@@ -40,6 +40,9 @@ Content:
     - [Self Join](#self_j)
     - [Max, Min, Count Functions](#max)
     - [Group By & Having](#group)
+
+- [SQL - other DB objects](#other)
+    - [Views](#view)
 
 
 # Introduction
@@ -334,15 +337,15 @@ Commands that gives access privilege to data. Privileges can be:
 ## Insert Command
 <a id="insert"></a>
 
-- INSERT INTO TableName (Col1_name, Col2_name, Col3_name, Col4_name) VALUES ('Col1_Value_char', 'Col2_Value_char', Col3_Value_Number, 'Col4_Value_Date')  
+> INSERT INTO TableName (Col1_name, Col2_name, Col3_name, Col4_name) VALUES ('Col1_Value_char', 'Col2_Value_char', Col3_Value_Number, 'Col4_Value_Date')  
   
 **OR** if columns order is known  
 
-- INSERT INTO TableName VALUES ('Col1_Value_char', 'Col2_Value_char', Col3_Value_Number, 'Col4_Value_Date')
+> INSERT INTO TableName VALUES ('Col1_Value_char', 'Col2_Value_char', Col3_Value_Number, 'Col4_Value_Date')
 
 **OR** if not all columns have values
   
-- INSERT INTO TableName (Col1_name, Col2_name, Col4_name) VALUES ('Col1_Value_char', 'Col2_Value_char', 'Col4_Value_Date')
+> INSERT INTO TableName (Col1_name, Col2_name, Col4_name) VALUES ('Col1_Value_char', 'Col2_Value_char', 'Col4_Value_Date')
 
 
 ## Update Command
@@ -350,16 +353,16 @@ Commands that gives access privilege to data. Privileges can be:
 
 Used for editing data already in the database.
 
-- UPDATE Tablename
-- set column_to_be_updated = value
-- where column_used_as_criteria = criteria  
+> UPDATE Tablename  
+> set column_to_be_updated = value  
+> WHERE column_used_as_criteria = criteria  
 
-**NOTE:** In case after *WHERE* os empty then value will be added to all records.
+**NOTE:** In case after *WHERE* is empty then value will be added to all records.
 
 **Updating more than one column:**
-- UPDATE Tablename 
-- set column1 = value1 , column2 = value2
-- where column_used_as_criteria = criteria
+> UPDATE Tablename  
+> set column1 = value1 , column2 = value2  
+> WHERE column_used_as_criteria = criteria
 
 ## DELETE Command, Truncate
 <a id="delete"></a>
@@ -440,13 +443,13 @@ This query refers to either Ahmad/Ahmed or any name having *o* as the second cha
 ## Alias
 <a id="alias"></a>
 
-> SELECT Col1, Col2 * 5.6 as NewCol
+> SELECT Col1, Col2 * 5.6 as NewCol  
 > from Tablename
 
 New column named *NewCol* will be returned, along selected columns, containing the written formula's values.
 
-> Select Col1 + ' ' + Col2 as [Full Name]
-> from Tablename
+> Select Col1 + ' ' + Col2 as [Full Name]  
+> from Tablename  
 > Where Col3*12 > Value
 
 **+** is used to concatenate columns Col1 and Col2 having a space in between.   
@@ -545,3 +548,21 @@ Other Multi-row operators: IN , ALL , ANY
 
 *Having* is used when a condition is to be used with an aggregate function.
 
+# SQL - Other DB objects
+<a id="object"></a>
+
+## Views
+<a id="view"></a>
+
+A view is **logical table** based on a table or another view.  
+
+A view contains no table of its own, but is like a window through which data from table can be viewed or changed.
+
+The table on which a view is based is called base table.
+
+The view is stored as a SELECT statement in the data directory.
+
+> CREATE VIEW viewname [Cols] /*If empty then as displayed in table */
+> AS  
+> SELECT Col1, Col2  
+> FROM Tablename
