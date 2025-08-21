@@ -640,114 +640,25 @@ It's a process that takes a table through a series of tests(Normal Forms) in ord
 - certifying the goodness of a design. minimizing the redundancy or some anomalies; i.e. the problems that can happen such as: Insert, Update or Delete.
 - to have a new design for the database. 
 
-Why do we need
-Normalization? In this example,
-assuming that is a design
-for a real database, we can find that
-the design is consisted of 2 tables.
-One of them is called Employee Department
-and the other is called Employee Project.
-The common part between the 2 tables
-is that SSN of the employee is mentioned
-in Employee Project table as a foreign key
-Also, it forms with the project number;
-both of them together forming
-a Composite Primary Key. What are the problems
-that may face us here? It's clear in
-this example that there is a problem of
-redundancy; i.e. repetition. What's meant by
-Redundancy here? When I say that
-a certain employee in a certain department,
-I mention the department's name and
-number of the department's manager.
-For example, in the department no. 5
-there are 100 employees. This means
-I wrote the department's name 100 times
-and I wrote number of the department's manager
-100 times. It's the same here
-in the table of Employee with Project.
-Here is the column of the Employee Name.
-Data of the employee is already
-recorded in Employee Department table.
-However, to record that an employee
-has worked in a certain project
-I record the name of this employee
-in addition to the project's name with
-its location. Therefore, as much as employees
-have worked in a certain project,
-the project's name has been repeated
-and its location has also been repeated.
-These are the redundancy problems.
-Redundancy causes many problems.
-One of its problems is that it affects
-the storage, the tables' size,
-the database performance in general.
-Other problems that may happen
-for such a design
-may be like Insert, Update
-or Delete anomalies. What does this mean?
-Here, the primary key of
-the table is SSN.
-So, the master of this data is the employee.
-Which means that I cannot insert
-data of any department with no employees
-working in it. It's the same
-with the projects; I cannot
-enter data of the project without
-inserting number of the employee
-working in this project. These are the Insert problems.
-Assuming that I want to delete.
-A certain employee,
-say the last employee here,
-has resigned. So, I decided to delete
-his record. I delete using
-the primary key. What is the primary key
-here? it's SSN.
-So deleting this employee
-means that this department is empty.
-i.e. it's not exist any more.
-This department has this employee
-only. As he has resigned,
-and with this design of data,
-so this department is closed.
-This is a problem with Delete. There is
-a problem with Update. We've mentioned
-that when a certain employee works
-in the department, say, no. 5,
-I should record the department's name
-and number of the department's manager.
-Let's assume that the manager of this department
-was changed. If there are, say,
-100 employees, and I need to write
-an update statement to edit
-number of this department's manager,
-This update statement, instead of editing
-one record, it should edit
-100 records. This will slow
-down the database performance.
-These are the problems that
-may be found in such design.
-Therefore, Normalization helps
-to avoid duplication of data
-or Redundancy,
-Insert, Delete and Update anomalies
-which are the problems that can
-happen with Update, Insert and Delete,
-Frequent non values: back to
-our example, when the department's manager
-is changed or currently there is
-no manger instead of him yet
-if I write in his record "Null",
-suddenly I'll have 100 Null
-in this column only.
-So, this design also
-causes a problem in the existence
-of Null values. Again,
-When do we use Normalization?
-1- To test the goodness of a design;
-confirming that the design
-has no problems.
-2- In case of an old database,
-or trying to build a system based on existing files
-I can use Normalization
-for creating a design.
+Redundancy causes many problems including its effect on the storage, the tables' size, and the database performance in general. 
+
+## Functional Dependency
+<a id="Functional_Dependency"></a>
+
+It's a constraint between 2 attributes; i.e. 2 columns, or a group of columns together.  
+
+That's to say for every valid instance of A, that **value of A** uniquely determines the **value of B**. 
+
+**Types of Functional Dependency:**
+- Full Functional Dependency:
+    - It means that there is a non-key attribute which is fully dependent on Key. 
+    - depends completely on Key.  
+- Partial Functional Dependency:
+    - means that a non-key attribute depends on part of the key.
+- Transitive Functional Dependency:
+    - means there is a transitional period in the middle.
+    - It's to have a *non-key attribute* dependent on a *non-key attribute* which is dependent on a *key attribute*.
+
+## First Normal Form
+<a id="first"></a>
+
