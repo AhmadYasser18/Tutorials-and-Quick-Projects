@@ -695,3 +695,36 @@ the new table is kept as a foreign key in this table. This is due to two reasons
 ## Third Normal Form
 <a id="third"></a>
 
+To consider a relation is in Third Normal Form:
+- the relation should apply the 2NF
+- absence of transitive dependency
+
+**Transitive dependency** means there is a non-key attribute depends on a non-key, which depends on the key. In such case, take the transitive dependency case to a separate table.
+
+Note that there is a Fourth Normal Form, Fifth Normal Form,... There are normal forms higher than the third, but it's usually recommended to stop at the third one or according to the business case.  
+The higher of normal forms, the more relations are broken into separate tables which may affect the performance of the database.
+
+According to the table's size and the way the data is used,
+it is decided whether it is needed to divide the database into more separate relations, or stop at the Third Normal Form.
+
+To sum up for each normal form:
+1. First Normal Form:
+    - Conditions:
+        - should not have a multivalued
+        - a repeating group
+        - composite attribute
+    - Solutions:
+        - If there is a multivalued/repeating group, take it in a separate table with the primary key as a foreign key.
+        - If there is a composite attribute, divide the column of this composite into separate columns within the same table.
+2. Second Normal Form:
+    - Conditions:
+        - First Normal Form should be applied.
+        - the absence of partial decencies. 
+    - Solution:
+        - take the case of the partial dependency to a separate table, keeping the primary key of the new table as a foreign key for the other table.
+3. Third Normal Form
+    - Conditions:
+        - tables are in the Second normal Form
+        - there is no transitive dependency.
+    - Solution:
+        - take the case of transitive dependency in a separate table keeping the primary key of the new table as a foreign key.
