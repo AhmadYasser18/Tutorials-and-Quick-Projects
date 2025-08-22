@@ -47,7 +47,10 @@ Content:
 
 - [Normalization](#normalization)
     - [What is Normalization](#normalization_)
-    - 
+    - [Functional Dependency](#Functional_Dependency)
+    - [First Normal Form](#first)
+    - [Second Normal Form](#second)
+    - [Third Normal Form](#third)
 
 
 # Introduction
@@ -673,87 +676,22 @@ It's a condition using keys and functional dependencies of a certain relation to
 
 **First Normal Form:**  
 For a relation to be considered as a first Normal Form it mustn't have: 
-- a Multivalued Attribure
+- Multivalued Attribure
 - Repeating groups
--Composite attributes
+- Composite attributes
 
-The three of them
-can not be there. Let's
-see together an example that
-when I have some data that need to
-know to which Normal Form
-this relation belongs. In this example,
-here is some data from a school.
-It's an Excel sheet, not a database.
-So, based on this Excel sheet,
-I should design the appropriate
-database. The available information
-is that Student ID
-is what I can use as a key.
-By looking here, I search for a multivalued,
-a repeating group or a composite attribute.
-Here we can find that
-Telephone has more than one value
-in the Telephone column.
-As we've mentioned in database a domain
-should have only one value. So, it's not acceptable
-to have more than one value. It can be considered
-as a multivalued attribute.
-Here also, when checking the Subject,
-Subject Description and Grade,
-we find that each one of them has more than
-one value with respect to the primary key.
-They also can be considered
-Multivalued attributes. Each one of them
-is a multivalued attribute.
-Subject has more than one value.
-Subject Description has more than one value.
-Grade has more than one value. Therefor,
-the three of them are also multivalued attributes.
-However, Subject, Subject Description
-and Grade are related to each other.
-When I record a student in
-a certain subject, I add the code
-of the subject, the subject description
-then add his grade.
-So, the three of them are related to each other.
-If there are many multivalued attributes
-and there is a relation between them;
-a relation between their data,
-so this group is
-called a Repeating Group.
-In this example, there are 2 cases:
-Multivalued and Repeating group.
-What should I do for the multivalued
-or repeating group? How can I solve this
-problem? I'll break the relation
-into separate relations.
-If there is a multivalued attribute,
-I use the multivalued attribute
-with the primary key as a foreign key
-in a separate table.
-The table format will be like that.
-Here is Student ID as
-Foreign key. I'll take Telephone with it,
-so both of them together make
-a composite primary key. Then,
-I'll take the repeating group together;
-i.e. to take these three attributes together,
-and add them in a separate table.
-I add the primary key, which is
-Student ID, as a foreign key.
-So the table will be like that.
-Here are Student ID, Subject,
-Subject Description and Grade.
-I took Student ID and Subject
-to form together a new composite
-primary key. For the rest
-of attributes with Student ID,
-they will stay in the table.
-Therefore, the First Normal Form
-has 3 tables: the main table
-of Student, table of Student ID
-and Telephone together
-and table of Student ID and Subject
-together with Subject Description and
-Grade also.
+## Second Normal Form
+<a id="second"></a>
+
+A table or a relation is in the Second Normal Form:
+- when it applies the First Normal Form (Normal Forms are sequential 1NF>2NF>3NF).
+- there should not be a partial dependency in the table (no non-key attribute depends on a part of the key). 
+
+If there is a case for partial dependency, take the non-key attribute and part of the key it depends on to a separate table. Then the key of
+the new table is kept as a foreign key in this table. This is due to two reasons:
+- data should be kept related to each other (every time the table is being broken, there should be a foreign key).
+- The non-key attribute is dependent on the key thus should be kept together in one relation.
+
+## Third Normal Form
+<a id="third"></a>
+
