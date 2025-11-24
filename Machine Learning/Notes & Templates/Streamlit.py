@@ -23,13 +23,26 @@ x = np.array([[1,2,3],[4,5,6]])
 
 y = pd.DataFrame({'Name':['A', 'b', 'C'],
                   'Age':[1,2,3]})
+z = pd.DataFrame({'Name':[1],
+                  'Age':[1]})
+st.subheader('Editor')
+z_ =st.data_editor(z)
 
-show = y
 def show():
-    st.write(y.loc[0])    
+    st.subheader('Y')
+    st.dataframe(y)    
+def reset():
+    st.subheader('Z')
+    st.dataframe(z)
+
+
+def edited():
+    st.subheader('Edited')
+    st.table(z_)
 
 button = st.button('Press Me', on_click=show)
 
-st.write(y)
+button = st.button('Reset', on_click=reset)
 
-1+1
+button = st.button('Show Edited', on_click=edited)
+
