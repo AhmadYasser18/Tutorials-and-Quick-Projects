@@ -1,0 +1,35 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+
+import streamlit as st
+
+st.title('Model Selection',)
+
+st.divider()
+
+st.code("""
+def function:
+        print('hello')
+        return
+
+""", language="python")
+#Adding Image
+#w = 100
+#st.image(os.path.join(os.getcwd(), 'Static', 'Image.jpg'), width = w)
+
+x = np.array([[1,2,3],[4,5,6]])
+
+y = pd.DataFrame({'Name':['A', 'b', 'C'],
+                  'Age':[1,2,3]})
+
+show = y
+def show():
+    st.write(y.loc[0])    
+
+button = st.button('Press Me', on_click=show)
+
+st.write(y)
+
+1+1
