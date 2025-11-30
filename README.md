@@ -11,5 +11,11 @@ Content:
 ## - [HackerRank](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/HackerRank)
     contains solution to problems from HackerRank
 ## - [Machine Learning](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning)
+### - [Attention in Transformers](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning/Attention%20in%20Transformers)
+### - [How Transformer LLMs work](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning/How%20Transfomer%20LLMs%20work)
+### - [ML Basics_CognitiveClass](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning/ML%20Basics_CognitiveClass)
+### - [Notes & Templates](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning/Notes%20%26%20Templates)
+### - [Pytorch](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Machine%20Learning/Pytorch)
+
 ## - [Projects](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Projects)
 ## - [Pygame](https://github.com/AhmadYasser18/Tutorials-and-Quick-Projects/tree/main/Pygame)
